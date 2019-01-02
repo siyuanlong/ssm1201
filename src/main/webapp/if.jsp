@@ -1,4 +1,4 @@
-﻿<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
 <!doctype html public "-//w3c//dtd xhtml 1.0 frameset//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-frameset.dtd">
 <html>
     <head>
@@ -7,15 +7,12 @@
         <meta http-equiv=cache-control content=no-cache />
         <meta http-equiv=expires content=-1000 />
         
-        <title>湖南商贸经济管理专修学院</title>
+        <title>启明星辰人力资源管理V1.0</title>
     </head>
-    <frameset border=0 framespacing=0 rows="60, *" frameborder=0>
-        <frame name=head src="head.jsp" frameborder=0 noresize scrolling=no>
-            <frameset cols="170, *">
+		<frameset cols="170, *">
                 <frame name=left src="left.jsp" frameborder=0 noresize />
                 <frame name=right src="right.jsp" frameborder=0 noresize scrolling=yes />
-            </frameset>
-    </frameset>
-    <noframes>
+		</frameset>		
+    <noframes>	
     </noframes>
 </html>
