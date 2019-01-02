@@ -9,7 +9,7 @@
 
 </head>
 <body id="userlogin_body">
-<form action="/" method="post">
+<form action="/login" method="post">
 <div id="user_login">
 	<dl>
 		<dd id="user_top">
@@ -26,11 +26,11 @@
 					<div class="user_main_box">
 						<ul>
 							<li class="user_main_text">用户名： </li>
-							<li class="user_main_input"><input name="TxtUserName" maxlength="20" id="TxtUserName" class="txtusernamecssclass"> </li>
+							<li class="user_main_input"><input name="userName" maxlength="20" id="TxtUserName" class="txtusernamecssclass"> </li>
 						</ul>
 						<ul>
 							<li class="user_main_text">密 码： </li>
-							<li class="user_main_input"><input type="password" name="TxtPassword" id="TxtPassword" class="txtpasswordcssclass"> </li>
+							<li class="user_main_input"><input type="password" name="userPs" id="TxtPassword" class="txtpasswordcssclass"> </li>
 						</ul>
 						<ul>
 							<li class="user_main_text">Cookie： </li>

@@ -47,7 +47,8 @@
 								<img height=9 src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="user/MyUser.html"  target="right">我的资料</a>
+								<%--我的资料对应user/MyUser.jsp，以及user_tb表格--%>
+								<a class=menuchild href="user/MyUser.jsp" target="right">我的资料</a>
 							</td>
 						</tr>
                         <tr height=20>
@@ -55,7 +56,8 @@
 								<img height=9   src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="user/class.html"  target="right">班级信息</a>
+								<%--班级信息对应--%>
+								<a class=menuchild href="user/class.jsp" target="right">班级信息</a>
 							</td>
 						</tr>
 						<tr height=20>
@@ -63,7 +65,7 @@
 								<img height=9   src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="user/password.html"  target="right">修改密码</a>
+								<a class=menuchild href="user/password.jsp" target="right">修改密码</a>
 							</td>
 						</tr>
 						<!--<tr height=20>
@@ -71,7 +73,7 @@
 								<img height=9   src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="user/systemMsge.html"  target="right">学院通知</a>
+								<a class=menuchild  href="user/systemMsge.jsp"  target="right">学院通知</a>
 							</td>
 						</tr>-->
                        
@@ -98,7 +100,7 @@
 								<img height=9  src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="Educational/class/list.html"   target="right">班级管理</a>
+								<a class=menuchild href="Educational/class/list.jsp" target="right">班级管理</a>
 							</td>
 						</tr>
 						
@@ -107,7 +109,7 @@
 								<img height=9  src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="Educational/student/list.html"   target="right">学生管理</a>
+								<a class=menuchild href="Educational/student/list.jsp" target="right">学生管理</a>
 							</td>
 						</tr>
 						
@@ -117,7 +119,7 @@
 								<img height=9 src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="Educational/exam/exam.html"  target="right">组织考试</a>
+								<a class=menuchild href="Educational/exam/exam.jsp" target="right">组织考试</a>
 							</td>
 						</tr>
 
@@ -126,7 +128,7 @@
 								<img height=9 src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="Educational/Auditing.html"  target="right">班级审核</a>
+								<a class=menuchild href="Educational/Auditing.jsp" target="right">班级审核</a>
 							</td>
 						</tr>
 						
@@ -153,7 +155,7 @@
 								<img height=9 src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="user/msg.html"  target="right">学员信息</a>
+								<a class=menuchild href="user/msg.jsp" target="right">学员信息</a>
 							</td>
 						</tr>
 						
@@ -162,7 +164,7 @@
 								<img height=9  src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="Educational/list.html"   target="right">我的成绩</a>
+								<a class=menuchild href="Educational/list.jsp" target="right">我的成绩</a>
 							</td>
 						</tr>
 						 <tr height=20>
@@ -170,7 +172,7 @@
 								<img height=9  src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="Educational/Book.html"   target="right">我的书籍</a>
+								<a class=menuchild href="Educational/Book.jsp" target="right">我的书籍</a>
 							</td>
 						</tr>
 						
@@ -196,7 +198,7 @@
 								<img height=9  src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="study/StudentMaterial.html"   target="right">资料下载</a>
+								<a class=menuchild href="study/StudentMaterial.jsp" target="right">资料下载</a>
 							</td>
 						</tr>
                        
@@ -223,7 +225,7 @@
 								<img height=9  src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="book/list-ziliao.html"   target=right >资料上传</a>
+								<a class=menuchild href="book/list-ziliao.jsp" target=right >资料上传</a>
 							</td>
 						</tr>
                         <tr height=20>
@@ -231,7 +233,7 @@
 								<img height=9  src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="book/list.html"   target=right >书籍管理</a>
+								<a class=menuchild href="book/list.jsp" target=right >书籍管理</a>
 							</td>
 						</tr>
                      </table>
@@ -254,7 +256,7 @@
 								<img height=9 src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="power/user/list.html"  target="right">用户管理</a>
+								<a class=menuchild href="power/user/list.jsp" target="right">用户管理</a>
 							</td>
 						</tr>
                         
@@ -263,7 +265,7 @@
 								<img height=9 src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="power/role/list.html"  target="right">角色管理</a>
+								<a class=menuchild href="power/role/list.jsp" target="right">角色管理</a>
 							</td>
 						</tr>
                         
@@ -272,7 +274,7 @@
 								<img height=9  src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild  href="power/menu/list.html"   target="right">菜单管理</a>
+								<a class=menuchild href="power/menu/list.jsp" target="right">菜单管理</a>
 							</td>
 						</tr>				
                         <tr height=4>

@@ -18,7 +18,7 @@
                 <td style="font-weight: bold; color: #fff; padding-top: 20px" 
                     align="right">
                     当前用户：admin &nbsp;&nbsp; 
-					<a style="color: #fff"  href="user/password.html"  target="right">修改口令</a> 
+					<a style="color: #fff" href="user/password.jsp" target="right">修改口令</a>
 					&nbsp;&nbsp; 
 					<a style="color: #fff" href="login.jsp" target=_top>退出系统</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;

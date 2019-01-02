@@ -14,7 +14,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-2.5.xsd">
     <!--扫描整个com.study包-->
-    <context:component-scan base-package="com.study"></context:component-scan>
+    <context:component-scan base-package="com"></context:component-scan>
 
     <!--加载db.properties配置文件-->
     <context:property-placeholder location="classpath:db.properties"/>
@@ -28,16 +28,22 @@
     </bean>
 
     <!--创建SqlSessionFactoryBean-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!--指定mapper文件路径-->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
 
     <!--创建SqlSessionTemplate，id=sqlSessionTemplate对应dao层的属性名-->
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-        <!--将sqlSessionFactory注入-->
+    <!--<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        &lt;!&ndash;将sqlSessionFactory注入&ndash;&gt;
         <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>-->
+
+    <!--省略dao层实现类的写法-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="factory"/>
     </bean>
 
     <!--试图解析器，用于controller层-->

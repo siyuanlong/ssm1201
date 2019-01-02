@@ -1,4 +1,7 @@
-<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@page import="java.util.*"%>
+<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="frm" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
@@ -6,7 +9,8 @@
         <link href="css/admin.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
-        <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
+
+    <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
                 <td background=./img/title_bg1.jpg>当前位置: </td></tr>
             <tr>
@@ -23,10 +27,10 @@
                     <table height=100 cellspacing=0 cellpadding=0 width="100%" border=0>
 
                         <tr>
-                         <td>当前时间：2008-12-27 17:03:55</td>
+                         <td><%=new Date() %></td>
 						</tr>
                         <tr>
-                            <td style="font-weight: bold; font-size: 16px">admin</td>
+                            <td style="font-weight: bold; font-size: 16px">${sessionScope.u1.userName}</td>
 						</tr>
                         <tr>
                             <td>欢迎进入网站管理中心！</td></tr></table></td>
@@ -46,19 +50,19 @@
         <table cellspacing=0 cellpadding=2 width="95%" align=center border=0>
             <tr>
                 <td align=right width=100>登陆帐号：</td>
-                <td style="color: #880000">admin</td></tr>
+                <td style="color: #880000">${sessionScope.u1.userName}</td></tr>
             <tr>
                 <td align=right>真实姓名：</td>
-                <td style="color: #880000">admin</td></tr>
+                <td style="color: #880000">${sessionScope.u1.userRealname}</td></tr>
             <tr>
                 <td align=right>注册时间：</td>
-                <td style="color: #880000">2007-7-25 15:02:04</td></tr>
+                <td style="color: #880000">${sessionScope.u1.regdate}</td></tr>
             <tr>
                 <td align=right>登陆次数：</td>
-                <td style="color: #880000">58</td></tr>
+                <td style="color: #880000">${sessionScope.u1.logincount}</td></tr>
             <tr>
                 <td align=right>上线时间：</td>
-                <td style="color: #880000">2008-12-27 17:02:54</td></tr>
+                <td style="color: #880000">${logintime}</td></tr>
            
            
         </table>		
