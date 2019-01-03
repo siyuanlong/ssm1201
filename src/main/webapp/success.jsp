@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by syl
-  User: Administrator
-  Date: 2019/1/2
-  Time: 10:03
-  专业找bug
---%>
 <%@ page isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>

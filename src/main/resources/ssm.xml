@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-2.5.xsd">
-    <!--扫描整个com.study包-->
+    <!--扫描整个com包-->
     <context:component-scan base-package="com"></context:component-scan>
 
     <!--加载db.properties配置文件-->
@@ -82,7 +82,9 @@
     交由Servlet处理。
 -->
 
-    <mvc:resources mapping="/**" location="/"></mvc:resources>
+    <!--<mvc:resources mapping="/**" location="/"></mvc:resources>-->
+    <!--等同于上面写法-->
+    <mvc:default-servlet-handler/>
 
 <!--
     配置事务管理器
