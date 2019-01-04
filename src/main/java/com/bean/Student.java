@@ -37,6 +37,16 @@ public class Student {
 
     private Integer age;
 
+    private Major major;
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public void setMajor(Major major) {
+        this.major = major;
+    }
+
     public Integer getStudentid() {
         return studentid;
     }

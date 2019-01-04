@@ -18,11 +18,33 @@
     <result column="classstate" jdbcType="VARCHAR" property="classstate" />
     <result column="auditcount" jdbcType="INTEGER" property="auditcount" />
     <result column="auditid" jdbcType="INTEGER" property="auditid" />
+
+    <!--班级管理分页查询多对一   对象配置-->
+    <association property="department" javaType="com.bean.Department">
+      <id column="departid" jdbcType="INTEGER" property="departid" />
+      <result column="departname" jdbcType="VARCHAR" property="departname" />
+    </association>
+
   </resultMap>
   <sql id="Base_Column_List">
     classid, classnum, deptid, majorid, classname, classbegin, classend, classcontent, 
     classqq, tagline, classteacher, teacherid, peoplecount, classstate, auditcount, auditid
   </sql>
+
+  <!--班级管理分页查询语句-->
+  <select id="getAll" resultMap="BaseResultMap">
+    select * from classes cls , department dep
+    where  cls.deptid = dep.departid
+
+    <if test="cname!=null and cname != ''">
+        and classname like '%${cname}%'
+    </if>
+
+    <if test="dname!=null and dname != ''">
+        and dep.departname like '%${dname}%'
+    </if>
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

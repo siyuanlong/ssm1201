@@ -1,4 +1,4 @@
-﻿<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+﻿<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
@@ -16,7 +16,7 @@
     
     <script type="text/javascript">
         function submitMail() {
-            alert("修改成功！");
+            document.forms[0].submit();
         }
     </script>
 </head>
@@ -30,18 +30,20 @@
         </div>
 </div>
 <div class="cztable">
+    <form action="/updatepw" method="post">
+        <input type="hidden" name="userId" value="${sessionScope.u1.userId}"/>
     <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
             <td align="right" width="80">原密码：</td>
-            <td><input type="password" name="f_goods_name" /></td>
+            <td><input type="password" name="originalpw" value="${sessionScope.u1.userPs}" /></td>
         </tr>
         <tr>
             <td align="right" width="90">新密码：</td>
-            <td><input type="password" name="f_goods_name" /></td>
+            <td><input type="password" name="userPs" /></td>
         </tr>
         <tr>
             <td align="right" width="90">密码确认：</td>
-            <td><input type="password" name="f_goods_name" /></td>
+            <td><input type="password" name="confirmpw" /></td>
         </tr>
        
         <tr align="center">
@@ -53,6 +55,7 @@
             </td>
         </tr>
     </table>
+    </form>
 </div>
 
             </div>

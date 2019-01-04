@@ -1,4 +1,5 @@
-﻿<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+﻿<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
@@ -29,53 +30,55 @@
         </div>
 </div>
 <div class="cztable">
-    <form action="../right.jsp" method="post">
+    <form action="/updateinfo" method="post">
+        <input type="hidden" name="userId" value="${sessionScope.u1.userId}"/>
 	<table width="100%" cellpadding="0" cellspacing="0">
 		<tr  width="120px;">
                     <td width="120px">用户名：<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="f_goods_image" value="yangzhao" />
+						<input type="text"  name="userName" value="${sessionScope.u1.userName}" />
 					</td>
                 </tr>
 
                 <tr  width="120px;">
                     <td>姓名<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="f_goods_image" value="杨XX" />
+						<input type="text"  name="userRealname" value="${sessionScope.u1.userRealname}" />
 					</td>
                 </tr>
                 <tr>
                     <td>性别<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="radio" name="gender" checked value="1" />男 <input type="radio" name="gender" value="0"/>女
+                        <input type="radio" name="userSex" ${sessionScope.u1.userSex=="男"?"checked":""} value="男"/>男
+                        <input type="radio" name="userSex" ${sessionScope.u1.userSex=="女"?"checked":""} value="女"/>女
                     </td>
                 </tr>
 
 				<tr>
                     <td>EMAIL：</td>
                     <td>
-                        <input type="text" name="f_goods_image" value="1332@126.com" />
+                        <input type="text" name="userEmail" value="${sessionScope.u1.userEmail}" />
                     </td>                
                 </tr>
 
 				<tr>
                     <td>联系电话：</td>
                     <td>
-                        <input type="text" name="f_goods_image" value="13333333333" />
+                        <input type="text" name="userPhone" value="${sessionScope.u1.userPhone}" />
                     </td>                
                 </tr>
 
 				<tr>
                     <td>住址：</td>
                     <td>
-                        <input type="text" name="f_goods_image" value="朝阳" />
+                        <input type="text" name="userAddress" value="${sessionScope.u1.userAddress}" />
                     </td>                
                 </tr>
 				              
 				<tr>
                     <td>身份证号：</td>
                     <td>
-                        <input type="text" name="f_goods_image" value="110111111111111111111" />
+                        <input type="text" name="userIdcard" value="${sessionScope.u1.userIdcard}" />
                     </td>                
                 </tr>
 				
@@ -83,7 +86,7 @@
 				<tr>
                     <td>简介<span style="color:red">*</span>：</td>
                     <td>
-                        <textarea>一个新开辟领域的探讨，探讨摸索</textarea>
+                        <textarea>${sessionScope.u1.userContent}</textarea>
                     </td>
                 </tr>
 		<tr>

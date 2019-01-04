@@ -100,7 +100,7 @@
 								<img height=9  src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild href="Educational/class/list.jsp" target="right">班级管理</a>
+								<a class=menuchild href="/Educational/class/list" target="right">班级管理</a>
 							</td>
 						</tr>
 						
@@ -109,7 +109,7 @@
 								<img height=9  src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild href="Educational/student/list.jsp" target="right">学生管理</a>
+								<a class=menuchild href="Educational/student/list" target="right">学生管理</a>
 							</td>
 						</tr>
 						

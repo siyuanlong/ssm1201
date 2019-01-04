@@ -2,6 +2,9 @@ package com.dao;
 
 import com.bean.Student;
 
+import java.util.List;
+import java.util.Map;
+
 public interface StudentMapper {
     int deleteByPrimaryKey(Integer studentid);
 
@@ -14,4 +17,7 @@ public interface StudentMapper {
     int updateByPrimaryKeySelective(Student record);
 
     int updateByPrimaryKey(Student record);
+
+    //查询所有学生信息
+    public List getAllStuInfo(Map map);
 }

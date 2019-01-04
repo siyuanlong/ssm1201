@@ -1,7 +1,7 @@
 <%@page import="java.util.*"%>
 <%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="frm" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
@@ -27,7 +27,7 @@
                     <table height=100 cellspacing=0 cellpadding=0 width="100%" border=0>
 
                         <tr>
-                         <td><%=new Date() %></td>
+                         <td><fmt:formatDate value="<%=new Date() %>" pattern="yyyy-MM-dd"></fmt:formatDate></td>
 						</tr>
                         <tr>
                             <td style="font-weight: bold; font-size: 16px">${sessionScope.u1.userName}</td>
@@ -56,16 +56,18 @@
                 <td style="color: #880000">${sessionScope.u1.userRealname}</td></tr>
             <tr>
                 <td align=right>注册时间：</td>
-                <td style="color: #880000">${sessionScope.u1.regdate}</td></tr>
+                <td style="color: #880000">
+                    <fmt:formatDate value="${sessionScope.u1.regdate}" pattern="yyyy-MM-dd"></fmt:formatDate></td></tr>
             <tr>
                 <td align=right>登陆次数：</td>
                 <td style="color: #880000">${sessionScope.u1.logincount}</td></tr>
             <tr>
                 <td align=right>上线时间：</td>
-                <td style="color: #880000">${logintime}</td></tr>
-           
-           
-        </table>		
+                <td style="color: #880000">
+                    <fmt:formatDate value="${sessionScope.logintime}" pattern="yyyy-MM-dd"></fmt:formatDate>
+                </td></tr></td></tr>
+
+        </table>
 <div style="text-align:center;">
 <p>维护信息：<a href="http://www.zparkedu.com" target="_blank">湖南管理学院</a></p>
 <p>联系电话：<a href="http://www.zparkedu.com" target="_blank">17110771077</a></p>

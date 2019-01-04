@@ -1,4 +1,6 @@
-<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -39,18 +41,18 @@
 
 	<div class="cztable">
 		<div>
-				  <form action="#" method="get">
+				  <form action="/Educational/student/list" method="get">
                     学生名称: 
-					<input type="text"  />
+					<input type="text" name="sname" value="${sname}" />
                      学生学号: 
-					<input type="text"  />
+					<input type="text" name="sid" value="${sid}"/>
 					性别: 
-					<select>
-							<option>--请选择--</option>
-							<option>男</option>
-							<option>女</option>
+					<select name="ssex">
+							<option value="">--请选择--</option>
+							<option value="1">男</option>
+							<option value="0">女</option>
 						</select>
-					<input type="button" value="查询" />
+					<input type="submit" value="查询" />
 
                 </form>
 
@@ -68,55 +70,35 @@
 						<th>操作</th>
                     </tr>
 
+				<c:forEach items="${stupi.list}" var="stu">
                     <tr id="product1">
-                        <td align="center">201308J001</td>
-						<td align="center">张三</td>
-						<td align="center">男</td>
-                        <td align="center">130000000</td>
-						<td align="center">JAVA</td>
-                        <td align="center">2015-10-7</td> 
+                        <td align="center">${stu.studentno}</td>
+						<td align="center">${stu.stuname}</td>
+						<td align="center">${stu.stusex}</td>
+                        <td align="center">${stu.phone}</td>
+						<td align="center">${stu.major.majorname}</td>
+                        <td align="center"><fmt:formatDate value="${stu.regdate}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
 						<td align="center">
 							<a href="add.jsp">修改</a>
 							<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 退学</a>
 							<a href="view.jsp">详细</a>
 						</td> 				                    
-                    </tr> 
+                    </tr>
+				</c:forEach>
 
-					 <tr id="product1">
-                        <td align="center">20108E00</td>
-						<td align="center">李四</td>
-						<td align="center">男</td>
-                        <td align="center">13011111111</td>
-						<td align="center">英语</td>
-                        <td align="center">2015-09-10</td> 
-						<td align="center">
-							<a href="add.jsp">修改</a>
-							<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 退学</a>
-							<a href="view.jsp">详细</a>
-						</td> 				                    
-                    </tr> 
-					
-					<tr id="product1">
-                        <td align="center">201308J001</td>
-						<td align="center">王二麻子</td>
-						<td align="center">男</td>
-                        <td align="center">13666666666</td>
-						<td align="center">JAVA</td>
-                        <td align="center">2015-10-7</td> 
-						<td align="center">
-							<a href="add.jsp">修改</a>
-							<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 退学</a>
-							<a href="view.jsp">详细</a>
-						</td> 				                    
-                    </tr> 
-					
-				
-					
                     <tr>
-                        <td colspan="20" style="text-align: center;">						
-						<a style="text-decoration: none;" href="#">
-                            首页 上一页  ... 7 8 9 10 11 12 ... 下一页 尾页 共1234条 每页显示 10/23 </a>
-                        </td>
+						<td colspan="20" style="text-align: center;">
+							<a style="text-decoration: none;" href="/Educational/student/list?sname=${sname}&sid=${sid}&ssex=${ssex}">首页</a>
+							<a style="text-decoration: none;" href="/Educational/student/list?stuindex=${stupi.pageNum-1<=1?1:stupi.pageNum-1}&sname=${sname}&sid=${sid}&ssex=${ssex}">上一页</a>
+
+							<c:forEach begin="1" end="${stupi.pages}"  var="i">
+								<a style="text-decoration: none;" href="/Educational/student/list?stuindex=${i}&sname=${sname}&sid=${sid}&ssex=${ssex}">${i}</a>
+							</c:forEach>
+
+							<a style="text-decoration: none;" href="/Educational/student/list?stuindex=${stupi.pageNum+1>=stupi.pages?stupi.pages:stupi.pageNum+1}&sname=${sname}&sid=${sid}&ssex=${ssex}">下一页</a>
+							<a style="text-decoration: none;" href="/Educational/student/list?stuindex=${stupi.pages}&sname=${sname}&sid=${sid}&ssex=${ssex}">尾页</a>
+							共${stupi.total}条 每页显示 ${stupi.pageNum}/${stupi.pages}
+						</td>
                     </tr>
                 </tbody>
             </table>

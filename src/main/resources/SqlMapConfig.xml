@@ -12,4 +12,9 @@
 
 <configuration>
 
+    <plugins>
+        <!--分页查询配置拦截器-->
+        <plugin interceptor="com.github.pagehelper.PageHelper"></plugin>
+    </plugins>
+
 </configuration>

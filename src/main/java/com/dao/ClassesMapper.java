@@ -1,6 +1,10 @@
 package com.dao;
 
 import com.bean.Classes;
+import com.github.pagehelper.PageInfo;
+
+import java.util.List;
+import java.util.Map;
 
 public interface ClassesMapper {
     int deleteByPrimaryKey(Integer classid);
@@ -14,4 +18,6 @@ public interface ClassesMapper {
     int updateByPrimaryKeySelective(Classes record);
 
     int updateByPrimaryKey(Classes record);
+
+    public List getAll(Map map);
 }

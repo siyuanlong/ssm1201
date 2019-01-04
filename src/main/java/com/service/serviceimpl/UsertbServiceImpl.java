@@ -1,7 +1,9 @@
 package com.service.serviceimpl;
 
+import com.bean.Classes;
 import com.bean.UserTb;
 import com.dao.UserTbMapper;
+import com.github.pagehelper.PageInfo;
 import com.service.UsertbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,12 @@ public class UsertbServiceImpl implements UsertbService {
 
     @Override
     public int updateByPrimaryKeySelective(UserTb record) {
-        return 0;
+        return userTbMapper.updateByPrimaryKeySelective(record);
     }
+
+    @Override
+    public UserTb selectByPrimaryKey(Integer userId) {
+        return userTbMapper.selectByPrimaryKey(userId);
+    }
+
 }
