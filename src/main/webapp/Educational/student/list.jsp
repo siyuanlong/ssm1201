@@ -18,6 +18,7 @@
 <script src="../../Script/Common.js" type="text/javascript"></script>
 <script src="../../Script/Data.js" type="text/javascript"></script>
 
+
 <script>
 	function del(){
 		confirm("确认操作？");
