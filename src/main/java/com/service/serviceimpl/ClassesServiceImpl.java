@@ -1,6 +1,9 @@
 package com.service.serviceimpl;
 
 import com.bean.Classes;
+import com.bean.Department;
+import com.bean.Major;
+import com.bean.UserTb;
 import com.dao.ClassesMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -30,5 +33,32 @@ public class ClassesServiceImpl implements ClassesService {
 
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
+    }
+
+
+
+
+    @Override
+    public Integer insertClass(Classes classes) {
+        int insert = classesMapper.insert(classes);
+        return insert;
+    }
+
+    @Override
+    public List<Department> finddeparts() {
+        List<Department> departs = classesMapper.selectalldeparts();
+        return departs;
+    }
+
+    @Override
+    public List<Major> findzy(Integer id) {
+        List<Major> majorList = classesMapper.selectallzy(id);
+        return majorList;
+    }
+
+    @Override
+    public List<UserTb> findct(Integer zyid) {
+        List<UserTb> ct = classesMapper.selectallct(zyid);
+        return ct;
     }
 }

@@ -1,5 +1,8 @@
 package com.dao;
 
+import com.bean.Classes;
+import com.bean.Department;
+import com.bean.Major;
 import com.bean.Student;
 
 import java.util.List;
@@ -20,4 +23,10 @@ public interface StudentMapper {
 
     //查询所有学生信息
     public List getAllStuInfo(Map map);
+
+    public List<Department> stuselectalldeparts();
+
+    public List<Major> stuselectallzy(Integer id);
+
+    public List<Classes> selectstuclass(Integer stuzyid);
 }

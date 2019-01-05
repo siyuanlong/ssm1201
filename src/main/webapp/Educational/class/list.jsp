@@ -1,6 +1,7 @@
 <%@ page isELIgnored="false" pageEncoding="utf-8" contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="p" uri="http://java.sun.com/jsp/jstl/p" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -32,7 +33,7 @@
 		<span> <span style="float:left">当前位置是：教务中心-》班级管理</span> <span
 				style="float: right; margin-right: 8px; font-weight: lighter">
             <a style="text-decoration: blink" href="javascript:alert('操作成功！');">【导出excel】&nbsp;&nbsp;</a>
-            <a style="text-decoration: blink" href="add.html">【新增班级】&emsp;&emsp;&emsp;&emsp;</a>
+            <a style="text-decoration: blink" href="/Educational/class/getdeparts">【新增班级】&emsp;&emsp;&emsp;&emsp;</a>
 		</span>
 		</span>
 </div>
@@ -84,9 +85,10 @@
 					</tr>
 				</c:forEach>
 
+
                     <tr>
                         <td colspan="20" style="text-align: center;">						
-						<a style="text-decoration: none;" href="/Educational/class/list?cname=${classname}&dname=${deptname}">首页</a>
+						<%--<a style="text-decoration: none;" href="/Educational/class/list?cname=${classname}&dname=${deptname}">首页</a>
 						<a style="text-decoration: none;" href="/Educational/class/list?index=${pi.pageNum-1<=1?1:pi.pageNum-1}&cname=${classname}&dname=${deptname}">上一页</a>
 
 						<c:forEach begin="1" end="${pi.pages}"  var="i">
@@ -95,7 +97,9 @@
 
 						<a style="text-decoration: none;" href="/Educational/class/list?index=${pi.pageNum+1>=pi.pages?pi.pages:pi.pageNum+1}&cname=${classname}&dname=${deptname}">下一页</a>
 						<a style="text-decoration: none;" href="/Educational/class/list?index=${pi.pages}&cname=${classname}&dname=${deptname}">尾页</a>
-					    共${pi.total}条 每页显示 ${pi.pageNum}/${pi.pages}
+					    共${pi.total}条 每页显示 ${pi.pageNum}/${pi.pages}--%>
+						<p:page uri="/Educational/class/list?cname=${classname}&dname=${deptname}" pageInfo="${pi}"></p:page>
+
                         </td>
                     </tr>
                 </tbody>

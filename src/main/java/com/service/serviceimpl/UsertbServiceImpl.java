@@ -34,4 +34,5 @@ public class UsertbServiceImpl implements UsertbService {
         return userTbMapper.selectByPrimaryKey(userId);
     }
 
+
 }

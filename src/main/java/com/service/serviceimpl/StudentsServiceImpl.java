@@ -1,5 +1,8 @@
 package com.service.serviceimpl;
 
+import com.bean.Classes;
+import com.bean.Department;
+import com.bean.Major;
 import com.bean.Student;
 import com.dao.StudentMapper;
 import com.github.pagehelper.PageHelper;
@@ -27,5 +30,30 @@ public class StudentsServiceImpl implements StudentsService {
         List list = studentMapper.getAllStuInfo(map);
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
+    }
+
+    @Override
+    public List<Department> stufinddeparts() {
+
+        List<Department> stuselectalldeparts = studentMapper.stuselectalldeparts();
+        return stuselectalldeparts;
+    }
+
+    @Override
+    public List<Major> stufindzy(Integer id) {
+        List<Major> stuselectallzy = studentMapper.stuselectallzy(id);
+        return stuselectallzy;
+    }
+
+    @Override
+    public List<Classes> stufindclass(Integer stuzyid) {
+        List<Classes> selectstuclass = studentMapper.selectstuclass(stuzyid);
+        return selectstuclass;
+    }
+
+    @Override
+    public Integer insertStu(Student student) {
+        int insert = studentMapper.insert(student);
+        return insert;
     }
 }

@@ -26,6 +26,12 @@
       <result column="departid" jdbcType="INTEGER" property="departid" />
     </collection>
   </resultMap>
+
+  <resultMap id="c" type="com.bean.Classes">
+      <id column="classid" property="classid"></id>
+      <result column="classname" property="classname"></result>
+  </resultMap>
+
   <sql id="Base_Column_List">
     studentid, studentno, stuname, deptid, majorid, classid, stusex, email, phone, registered, 
     address, politics, cardid, stucontent, regdate, stustate, age
@@ -48,6 +54,22 @@
     </where>
   </select>
 
+  <!--查询学院-->
+  <select id="stuselectalldeparts" resultType="com.bean.Department">
+    select * from department
+  </select>
+
+  <!--查询专业-->
+  <select id="stuselectallzy" resultType="com.bean.Major">
+    select * from major where departid = #{id}
+  </select>
+
+  <!--查询班级-->
+  <select id="selectstuclass" resultMap="c">
+      select c.classid,c.classname from student s,classes c
+      where s.classid = c.classid and s.majorid = #{stuzyid}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -59,13 +81,13 @@
     where studentid = #{studentid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bean.Student">
-    insert into student (studentid, studentno, stuname, 
+    insert into student (studentno, stuname,
       deptid, majorid, classid, 
       stusex, email, phone, 
       registered, address, politics, 
       cardid, stucontent, regdate, 
       stustate, age)
-    values (#{studentid,jdbcType=INTEGER}, #{studentno,jdbcType=VARCHAR}, #{stuname,jdbcType=VARCHAR}, 
+    values (#{studentno,jdbcType=VARCHAR}, #{stuname,jdbcType=VARCHAR},
       #{deptid,jdbcType=INTEGER}, #{majorid,jdbcType=INTEGER}, #{classid,jdbcType=INTEGER}, 
       #{stusex,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{registered,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{politics,jdbcType=VARCHAR}, 

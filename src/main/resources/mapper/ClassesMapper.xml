@@ -26,6 +26,13 @@
     </association>
 
   </resultMap>
+
+  <!--查询班主任使用-->
+  <resultMap id="u" type="com.bean.UserTb">
+      <id column="user_id" property="userId"/>
+      <result column="user_name" property="userName"/>
+  </resultMap>
+
   <sql id="Base_Column_List">
     classid, classnum, deptid, majorid, classname, classbegin, classend, classcontent, 
     classqq, tagline, classteacher, teacherid, peoplecount, classstate, auditcount, auditid
@@ -45,6 +52,22 @@
     </if>
   </select>
 
+  <!--查询学院信息-->
+  <select id="selectalldeparts" resultType="com.bean.Department">
+    select * from department
+  </select>
+
+  <!--查询班主任信息-->
+
+  <select id="selectallct" resultMap="u">
+    select ut.user_name,ut.user_id from user_class_major ucm ,user_tb ut
+    where ucm.userid = ut.user_id and ucm.majorid = #{zyid}
+  </select>
+
+  <select id="selectallzy" resultType="com.bean.Major">
+    select * from major where departid = #{id}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -56,13 +79,13 @@
     where classid = #{classid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.bean.Classes">
-    insert into classes (classid, classnum, deptid, 
+    insert into classes (classnum, deptid,
       majorid, classname, classbegin, 
       classend, classcontent, classqq, 
       tagline, classteacher, teacherid, 
       peoplecount, classstate, auditcount, 
       auditid)
-    values (#{classid,jdbcType=INTEGER}, #{classnum,jdbcType=VARCHAR}, #{deptid,jdbcType=INTEGER}, 
+    values (#{classnum,jdbcType=VARCHAR}, #{deptid,jdbcType=INTEGER},
       #{majorid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, #{classbegin,jdbcType=DATE}, 
       #{classend,jdbcType=DATE}, #{classcontent,jdbcType=VARCHAR}, #{classqq,jdbcType=VARCHAR}, 
       #{tagline,jdbcType=VARCHAR}, #{classteacher,jdbcType=VARCHAR}, #{teacherid,jdbcType=INTEGER}, 

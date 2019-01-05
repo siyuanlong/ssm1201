@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="p" uri="http://java.sun.com/jsp/jstl/p" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -35,7 +36,7 @@
 		<span>
                 <span style="float: left;">当前位置是：教务中心-》学生管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
-                    <a style="text-decoration: none;" href="add.jsp">【新增学生】</a>&emsp;&emsp;&emsp;&emsp;
+                    <a style="text-decoration: none;" href="/Educational/student/getdeparts">【新增学生】</a>&emsp;&emsp;&emsp;&emsp;
                 </span>
             </span>
 	</div>
@@ -89,7 +90,7 @@
 
                     <tr>
 						<td colspan="20" style="text-align: center;">
-							<a style="text-decoration: none;" href="/Educational/student/list?sname=${sname}&sid=${sid}&ssex=${ssex}">首页</a>
+							<%--<a style="text-decoration: none;" href="/Educational/student/list?sname=${sname}&sid=${sid}&ssex=${ssex}">首页</a>
 							<a style="text-decoration: none;" href="/Educational/student/list?stuindex=${stupi.pageNum-1<=1?1:stupi.pageNum-1}&sname=${sname}&sid=${sid}&ssex=${ssex}">上一页</a>
 
 							<c:forEach begin="1" end="${stupi.pages}"  var="i">
@@ -98,7 +99,9 @@
 
 							<a style="text-decoration: none;" href="/Educational/student/list?stuindex=${stupi.pageNum+1>=stupi.pages?stupi.pages:stupi.pageNum+1}&sname=${sname}&sid=${sid}&ssex=${ssex}">下一页</a>
 							<a style="text-decoration: none;" href="/Educational/student/list?stuindex=${stupi.pages}&sname=${sname}&sid=${sid}&ssex=${ssex}">尾页</a>
-							共${stupi.total}条 每页显示 ${stupi.pageNum}/${stupi.pages}
+							共${stupi.total}条 每页显示 ${stupi.pageNum}/${stupi.pages}--%>
+
+								<p:page uri="/Educational/student/list?sname=${sname}&sid=${sid}&ssex=${ssex}" pageInfo="${stupi}"></p:page>
 						</td>
                     </tr>
                 </tbody>
