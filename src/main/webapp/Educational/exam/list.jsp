@@ -110,10 +110,10 @@
 					<td>牛魔王</td>
 					<td><input type="text" value="84" size="5" /></td>
 					<td>
-						<input type="button" id="button2" value="修改" class="input2" />								   
+						<input type="button" id="button2" value="修改" class="input2" />
 					</td>
 				</tr>
-				
+
 				<tr align="center">
 					<td>3</td>
 					<td>20150015</td>
@@ -123,11 +123,11 @@
 					<td>孙悟空</td>
 					<td><input type="text" value="84" size="5" /></td>
 					<td>
-						<input type="button" id="button2" value="修改" class="input2" />								   
+						<input type="button" id="button2" value="修改" class="input2" />
 					</td>
 				</tr>
 
-				
+
 				<tr align="center">
 					<td>4</td>
 					<td>20150015</td>
@@ -137,7 +137,7 @@
 					<td>张六</td>
 					<td><input type="text"  size="5" /></td>
 					<td>
-						<input type="button" id="button2" value="添加" class="input2" />							   
+						<input type="button" id="button2" value="添加" class="input2" />
 					</td>
 				</tr>
 				 <tr>

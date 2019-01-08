@@ -21,6 +21,16 @@ public class Exam {
 
     private String examstate;
 
+    private Classes classes;
+
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
+    }
+
     public Integer getExamid() {
         return examid;
     }

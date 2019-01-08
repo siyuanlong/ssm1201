@@ -61,4 +61,21 @@ public class ClassesServiceImpl implements ClassesService {
         List<UserTb> ct = classesMapper.selectallct(zyid);
         return ct;
     }
+
+    @Override
+    public List<Classes> findClassByCids(int[] cids) {
+        List<Classes> classesList = classesMapper.selectClassByCids(cids);
+        return classesList;
+    }
+
+    @Override
+    public PageInfo<Classes> findShenheAll(int pageindex, int pagesize, Integer cid, String cname) {
+        PageHelper.startPage(pageindex,pagesize);
+        HashMap map = new HashMap();
+        map.put("cid",cid);
+        map.put("cname",cname);
+        List list = classesMapper.selectshenheall(map);
+        PageInfo pageInfo = new PageInfo(list);
+        return pageInfo;
+    }
 }

@@ -119,7 +119,7 @@
 								<img height=9 src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild href="Educational/exam/exam.jsp" target="right">组织考试</a>
+								<a class=menuchild href="Educational/exam/exam" target="right">组织考试</a>
 							</td>
 						</tr>
 
@@ -128,7 +128,7 @@
 								<img height=9 src="./img/menu_icon.gif" width=9>
 							</td>
                             <td>
-								<a class=menuchild href="Educational/Auditing.jsp" target="right">班级审核</a>
+								<a class=menuchild href="Educational/Auditing" target="right">班级审核</a>
 							</td>
 						</tr>
 						

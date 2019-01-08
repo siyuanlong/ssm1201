@@ -23,4 +23,10 @@ public interface ClassesService {
 
     //查询班主任
     public List<UserTb> findct(Integer zyid);
+
+    //查询班级信息
+    public List<Classes> findClassByCids(int[] cids);
+
+    //班级审核
+    public PageInfo<Classes> findShenheAll(int pageindex, int pagesize,Integer cid,String cname);
 }

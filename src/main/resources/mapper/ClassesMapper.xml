@@ -52,6 +52,20 @@
     </if>
   </select>
 
+  <!--班级审核分页查询语句-->
+  <select id="selectshenheall" resultMap="BaseResultMap">
+    select * from classes cls , department dep
+    where  cls.deptid = dep.departid
+
+    <if test="cid!=null">
+        and cls.classid = #{cid}
+    </if>
+
+    <if test="cname!=null and cname != ''">
+        and cls.classname like '%${cname}%'
+    </if>
+  </select>
+
   <!--查询学院信息-->
   <select id="selectalldeparts" resultType="com.bean.Department">
     select * from department
@@ -62,6 +76,20 @@
   <select id="selectallct" resultMap="u">
     select ut.user_name,ut.user_id from user_class_major ucm ,user_tb ut
     where ucm.userid = ut.user_id and ucm.majorid = #{zyid}
+  </select>
+
+  <!--导出excel,根据cids查询班级信息-->
+  <!--（1）List默认的名称为“list”。
+  （2）数组（Array）的默认名称为“array”。-->
+  <select id="selectClassByCids" resultMap="BaseResultMap">
+
+    select * from classes cla,department dep where cla.deptid = dep.departid
+    and cla.deptid in (
+    <foreach collection="array" separator="," item="cids">
+      #{cids}
+    </foreach>
+    )
+
   </select>
 
   <select id="selectallzy" resultType="com.bean.Major">

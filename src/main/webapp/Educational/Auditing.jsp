@@ -1,4 +1,7 @@
-﻿<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+﻿<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="p" uri="http://java.sun.com/jsp/jstl/p" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -39,12 +42,12 @@
 		<div>
 			
 			<ul class="seachform1">
-				<form action="#" method="post">
+				<form action="/Educational/Auditing" method="post">
 					<li>
 						<label>班级编号</label>
-						<input name="name" type="text" class="scinput1" value=""/>&nbsp;&nbsp;
+						<input name="cid" type="text" class="scinput1" value=""/>&nbsp;&nbsp;
                         <label>班级名称</label>
-						<input name="name" type="text" class="scinput1" value=""/>&nbsp;&nbsp;
+						<input name="cname" type="text" class="scinput1" value=""/>&nbsp;&nbsp;
 						<input  type="submit" class="scbtn" value="查询"/>&nbsp;
 					</li>
 						
@@ -65,43 +68,26 @@
                     </tr>
 
                    
-					
+				<c:forEach items="${shenhepi.list}" var="shenhe">
 					 <tr id="product1">
-                     	<td align="center">1</td>
-                        <td>术科系</td>
-						<td>201609W</td>
-                        <td>2016武术班</td>
-						<td>小刚</td>
-                        <td>60</td> 
-						<td>审核中</td>
-						<td>
-							<a href="javascript:alert('操作成功！');">通过</a>&nbsp;
-                            <a href="javascript:alert('操作成功！');">驳回</a>&nbsp;
-							<a href="../Educational/class/view.jsp">详细</a>
-						</td>
-                    </tr> 
-					
-                    <tr id="product1">
-                        <td align="center">2</td>
-                        <td>术科系</td>
-						<td>201609W</td>
-                        <td>2016武术班</td>
-						<td>小刚</td>
-                        <td>60</td> 
-						<td>复审</td>
+                     	<td align="center">${shenhe.classid}</td>
+                        <td>${shenhe.department.departname}</td>
+						<td>${shenhe.classnum}</td>
+                        <td>${shenhe.classname}</td>
+						<td>${shenhe.classteacher}</td>
+                        <td>${shenhe.peoplecount}</td>
+						<td>${shenhe.classstate}</td>
 						<td>
 							<a href="javascript:alert('操作成功！');">通过</a>&nbsp;
                             <a href="javascript:alert('操作成功！');">驳回</a>&nbsp;
 							<a href="../Educational/class/view.jsp">详细</a>
 						</td>
                     </tr>
-				
-					
+				</c:forEach>
                     <tr>
-                        <td colspan="20" style="text-align: center;">						
-						<a style="text-decoration: none;" href="#">
-                            首页 上一页  ... 7 8 9 10 11 12 ... 下一页 尾页 共1234条 每页显示 10/23 </a>
-                        </td>
+                        <td colspan="20" style="text-align: center;">
+							<p:page uri="/Educational/Auditing?cid=${classid}&cname=${classname}" pageInfo="${shenhepi}"/>
+						</td>
                     </tr>
                 </tbody>
             </table>

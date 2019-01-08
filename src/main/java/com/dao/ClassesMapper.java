@@ -30,5 +30,8 @@ public interface ClassesMapper {
 
     public List<UserTb> selectallct(Integer zyid);
 
+    public List<Classes> selectClassByCids(int[] cids);
+
+    public List selectshenheall(Map map);
 
 }

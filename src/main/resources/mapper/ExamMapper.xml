@@ -11,10 +11,42 @@
     <result column="classid" jdbcType="INTEGER" property="classid" />
     <result column="examcount" jdbcType="INTEGER" property="examcount" />
     <result column="examstate" jdbcType="VARCHAR" property="examstate" />
+
+    <association property="classes" javaType="com.bean.Classes">
+      <id column="classid" property="classid"/>
+      <result column="classname" property="classname"/>
+    </association>
+
   </resultMap>
   <sql id="Base_Column_List">
     examid, examnum, examsubject, examtime, deptid, majorid, classid, examcount, examstate
   </sql>
+
+  <!--查询考试信息(包括模糊查询)-->
+  <select id="getAllExamInfo" resultMap="BaseResultMap">
+    select * from exam e left join classes c
+    on e.classid = c.classid
+    <where>
+      <if test="subject!=null and subject!=''">
+        and examsubject = #{subject}
+      </if>
+    </where>
+  </select>
+
+  <!--学院查询语句-->
+  <select id="getAllDeptInfo" resultType="com.bean.Department">
+    select * from department
+  </select>
+
+  <!--专业查询语句-->
+  <select id="getMajorBydid" resultType="com.bean.Major">
+    select * from major where departid = #{deptid}
+  </select>
+
+  <select id="getClassByzid" resultType="com.bean.Classes">
+    select * from classes where majorid = #{zyid}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -30,7 +62,7 @@
       examtime, deptid, majorid, 
       classid, examcount, examstate
       )
-    values (#{examid,jdbcType=INTEGER}, #{examnum,jdbcType=VARCHAR}, #{examsubject,jdbcType=VARCHAR}, 
+    values (#{examid,jdbcType=INTEGER}, #{examnum,jdbcType=VARCHAR}, #{examsubject,jdbcType=VARCHAR},
       #{examtime,jdbcType=DATE}, #{deptid,jdbcType=INTEGER}, #{majorid,jdbcType=INTEGER}, 
       #{classid,jdbcType=INTEGER}, #{examcount,jdbcType=INTEGER}, #{examstate,jdbcType=VARCHAR}
       )

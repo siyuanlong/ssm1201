@@ -17,22 +17,42 @@
 	<script src="../../Script/Common.js" type="text/javascript"></script>
 	<script src="../../Script/Data.js" type="text/javascript"></script>
 
-	<script>
-        function del(){
-            confirm("确认删除？");
-        }
+	<%--处理"导出excel" 的样式--%>
+	<style type="text/css">
+		#sp{color: blue}
+		#sp:hover{
+			color: red;
+			cursor: pointer;
+		}
+	</style>
 
+	<%--处理全选--%>
+	<script type="text/javascript" >
+		$(function () {
+			//这里使用click点击事件
+			$("#all").click(function () {
+				var c = $(this)[0].checked;
+				var cids = $("[name=cids]");
+                for (var i = 0; i < cids.length ; i++) {
+					cids[i].checked = c;
+                }
+            })
+
+			//ajax提交表单
+            $("#sp").click(function(){
+                    alert("hello");
+                    $("#form02").submit();
+            })
+        })
 	</script>
-
-
-
 </head>
 <body>
 
 <div class="div_head" style="width: 100%;text-align:center;">
 		<span> <span style="float:left">当前位置是：教务中心-》班级管理</span> <span
 				style="float: right; margin-right: 8px; font-weight: lighter">
-            <a style="text-decoration: blink" href="javascript:alert('操作成功！');">【导出excel】&nbsp;&nbsp;</a>
+        <%--<a style="text-decoration: blink" href="javascript:alert('操作成功！');">【导出excel】&nbsp;&nbsp;</a>--%>
+			<span style="text-decoration: blink" id="sp">【导出excel】&nbsp;&nbsp;</span>
             <a style="text-decoration: blink" href="/Educational/class/getdeparts">【新增班级】&emsp;&emsp;&emsp;&emsp;</a>
 		</span>
 		</span>
@@ -52,11 +72,13 @@
 				</li>
 			</form>
 
+		<form id="form02" action="/daochu" method="post">
+
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tbody>
 				<tr style="font-weight: bold;">
 					<th  width="8%">
-						<input type="checkbox"/>
+						<input type="checkbox" id="all"/>
 					</th>
 					<th >院系</th>
 					<th width="">班级编号</th>
@@ -69,7 +91,7 @@
 				<c:forEach items="${pi.list}" var="cla">
 					<tr id="product1">
 						<td  width="8%" align="center">
-							<input type="checkbox"/>
+							<input type="checkbox" value="${cla.deptid}" name="cids"/>
 						</td>
 						<td align="center">${cla.department.departname}</td>
 						<td align="center">${cla.classnum}</td>
@@ -103,9 +125,10 @@
                         </td>
                     </tr>
                 </tbody>
-</table>
+			</table>
+		</form>
 
-		</div>
+	</div>
 
 	</div>
 	</div>
