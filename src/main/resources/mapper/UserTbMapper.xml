@@ -17,7 +17,14 @@
     <result column="logincount" jdbcType="INTEGER" property="logincount" />
     <result column="regdate" jdbcType="DATE" property="regdate" />
     <result column="managerid" jdbcType="INTEGER" property="managerid" />
+
+    <association property="role" javaType="com.bean.Role">
+        <id column="roleid" jdbcType="INTEGER" property="roleid" />
+        <result column="rolename" jdbcType="VARCHAR" property="rolename" />
+        <result column="rolestate" jdbcType="INTEGER" property="rolestate" />
+    </association>
   </resultMap>
+
   <sql id="Base_Column_List">
     user_id, student_id, role_id, user_name, user_ps, user_realname, user_sex, user_email, 
     user_phone, user_address, user_idcard, user_content, logincount, regdate, managerid
@@ -31,7 +38,7 @@
 
   <!--自定义查询语句-->
   <select id="selectByUserName" resultMap="BaseResultMap">
-    select * from user_tb where user_name = #{userName}
+    select * from user_tb ut,role r where ut.role_id = r.roleid and user_name = #{userName}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

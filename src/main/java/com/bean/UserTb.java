@@ -33,6 +33,16 @@ public class UserTb {
 
     private Integer managerid;
 
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public Integer getUserId() {
         return userId;
     }

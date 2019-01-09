@@ -40,7 +40,6 @@
 
 			//ajax提交表单
             $("#sp").click(function(){
-                    alert("hello");
                     $("#form02").submit();
             })
         })

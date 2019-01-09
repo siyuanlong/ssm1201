@@ -15,17 +15,28 @@ public class PageTag extends SimpleTagSupport {
     public void doTag() throws JspException, IOException {
         JspWriter out = getJspContext().getOut();
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("<a style='text-decoration: none'; href='"+uri+"'>首页</a>&nbsp;&nbsp;");
-        stringBuffer.append("<a style='text-decoration: none;' href='"+uri+"&index="+(pageInfo.getPageNum()-1<=1?1:pageInfo.getPageNum()-1)+"'>上一页</a>&nbsp;&nbsp;");
+        //判断uri里面是否存在"?",如果存在则在uri后面加上"&"
+        if (uri.indexOf("?")!=-1){
 
-        for (int i=1;i<=pageInfo.getPages();i++){
-            stringBuffer.append("<a style='text-decoration: none;' href='"+uri+"&index="+i+"'>"+i+"</a>&nbsp;&nbsp;");
+            uri = uri + "&";
+
+        }else {
+
+            uri = uri + "?";
+
         }
 
-        stringBuffer.append("<a style='text-decoration: none;' href='"+uri+"&index="+(pageInfo.getPageNum()+1>=pageInfo.getPages()?pageInfo.getPages():pageInfo.getPageNum()+1)+"'>下一页</a>&nbsp;&nbsp;");
-        stringBuffer.append("<a style='text-decoration: none'; href='"+uri+"&index="+(pageInfo.getPages())+"'>尾页</a>&nbsp;&nbsp;");
-        stringBuffer.append("共"+(pageInfo.getTotal())+"条&nbsp;&nbsp;每页显示"+(pageInfo.getPageNum())+"/"+(pageInfo.getPages()));
-        out.print(stringBuffer.toString());
+            stringBuffer.append("<a style='text-decoration: none'; href='"+uri+"'>首页</a>&nbsp;&nbsp;");
+            stringBuffer.append("<a style='text-decoration: none;' href='"+uri+"index="+(pageInfo.getPageNum()-1<=1?1:pageInfo.getPageNum()-1)+"'>上一页</a>&nbsp;&nbsp;");
+
+            for (int i=1;i<=pageInfo.getPages();i++){
+                stringBuffer.append("<a style='text-decoration: none;' href='"+uri+"index="+i+"'>"+i+"</a>&nbsp;&nbsp;");
+            }
+
+            stringBuffer.append("<a style='text-decoration: none;' href='"+uri+"index="+(pageInfo.getPageNum()+1>=pageInfo.getPages()?pageInfo.getPages():pageInfo.getPageNum()+1)+"'>下一页</a>&nbsp;&nbsp;");
+            stringBuffer.append("<a style='text-decoration: none'; href='"+uri+"index="+(pageInfo.getPages())+"'>尾页</a>&nbsp;&nbsp;");
+            stringBuffer.append("共"+(pageInfo.getTotal())+"条&nbsp;&nbsp;每页显示"+(pageInfo.getPageNum())+"/"+(pageInfo.getPages()));
+            out.print(stringBuffer.toString());
     }
 
     public String getUri() {

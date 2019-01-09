@@ -99,8 +99,6 @@ public class ClassesController {
     public void excelpoi(int[] cids,HttpServletResponse response){
         try {
         List<Classes> classesList = classesService.findClassByCids(cids);
-        System.out.println("classesList:"+classesList);
-        System.out.println(classesList);
         String[] headers = {"学院名称", "班级编号", "班级名称", "班主任老师", "人数"};
         PoiUtil.firstRow(headers);
         PoiUtil.otherRows(classesList);

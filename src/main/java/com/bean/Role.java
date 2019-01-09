@@ -1,11 +1,23 @@
 package com.bean;
 
+import java.util.List;
+
 public class Role {
     private Integer roleid;
 
     private String rolename;
 
     private Integer rolestate;
+
+    private List<Menu> menus;
+
+    public List<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
+    }
 
     public Integer getRoleid() {
         return roleid;

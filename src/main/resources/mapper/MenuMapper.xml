@@ -9,9 +9,66 @@
     <result column="menustate" jdbcType="INTEGER" property="menustate" />
     <result column="menuremark" jdbcType="VARCHAR" property="menuremark" />
   </resultMap>
+
+  <resultMap id="m1" type="com.bean.UserTb">
+      <id column="user_id" jdbcType="INTEGER" property="userId" />
+      <result column="student_id" jdbcType="INTEGER" property="studentId" />
+      <result column="role_id" jdbcType="INTEGER" property="roleId" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+      <result column="user_ps" jdbcType="VARCHAR" property="userPs" />
+      <result column="user_realname" jdbcType="VARCHAR" property="userRealname" />
+      <result column="user_sex" jdbcType="VARCHAR" property="userSex" />
+      <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+      <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+      <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+      <result column="user_idcard" jdbcType="VARCHAR" property="userIdcard" />
+      <result column="user_content" jdbcType="VARCHAR" property="userContent" />
+      <result column="logincount" jdbcType="INTEGER" property="logincount" />
+      <result column="regdate" jdbcType="DATE" property="regdate" />
+      <result column="managerid" jdbcType="INTEGER" property="managerid" />
+
+      <association property="role" javaType="com.bean.Role">
+        <id column="roleid" jdbcType="INTEGER" property="roleid" />
+        <result column="rolename" jdbcType="VARCHAR" property="rolename" />
+        <result column="rolestate" jdbcType="INTEGER" property="rolestate" />
+      </association>
+  </resultMap>
+
   <sql id="Base_Column_List">
     menuid, menuname, upmenuid, menupath, menustate, menuremark
   </sql>
+
+  <select id="selectUsersByUids" parameterType="java.lang.Integer" resultMap="m1">
+    select * from user_tb ut,role r where ut.role_id = r.roleid and ut.role_id in (
+        <foreach collection="array" separator="," item="uids">
+          #{uids}
+        </foreach>
+    )
+  </select>
+
+  <select id="selectMenuByRoleid" resultType="com.bean.Menu">
+    select * from menu m ,middle mid where m.menuid = mid.menuid and mid.roleid = #{roleid}
+  </select>
+
+  <select id="selectAllUsers" resultMap="m1">
+    select * from user_tb ut,role r where ut.role_id = r.roleid
+  </select>
+
+  <select id="selectAllRoles" resultType="com.bean.Role">
+      select * from role
+  </select>
+
+  <delete id="PlDeleteUsers" parameterType="java.lang.Integer">
+    /*
+      注意该处括号不能少
+    */
+    delete from user_tb where user_id in (
+    <foreach collection="array" item="ids" separator=",">
+      #{ids}
+    </foreach>
+    )
+  </delete>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

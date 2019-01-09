@@ -1,4 +1,6 @@
-<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="p" uri="http://java.sun.com/jsp/jstl/p" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
@@ -13,10 +15,53 @@
     <script src="../../Script/jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
     <script src="../../Script/Common.js" type="text/javascript"></script>
     <script src="../../Script/Data.js" type="text/javascript"></script>
-    <script>
-		function del(){
-			confirm("确定删除？");
-		}
+
+    <style type="text/css">
+        .sp{
+            color: blue;
+        }
+        .sp:hover{
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+
+    <script type="text/javascript">
+        //批量删除
+		$(function () {
+
+            $("#sp1").click(function () {
+                /*
+                方式一:
+                注意:第一个$("#form01")一定要加[0]，否则没有效果
+                */
+                $("#form01")[0].action = "/power/user/excel";
+                $("#form01").submit();
+
+                /*方式二:
+                document.forms[0].action = "/power/user/excel";
+                document.forms[0].submit();
+                */
+            })
+
+            $("#sp2").click(function () {
+                $("#form01")[0].action = "/power/user/deleteUser";
+                $("#form01").submit();
+                /*document.forms[0].action = "/power/user/deleteUser";
+                document.forms[0].submit();*/
+            })
+            /*
+                设置多选全选和全不选
+                注意使用$("#id")[0].checked的方式可以得到该标签对应的value值
+                注意ids是数组，赋值前必须先进行遍历
+           */
+            $("#all").click(function () {
+               var ids = $("[name=ids]");
+                for (var i = 0; i <ids.length ; i++) {
+                    ids[i].checked = $(this)[0].checked;
+                }
+            })
+        })
 	</script>
 
 </head>
@@ -26,9 +71,9 @@
 <div class="div_head" style="width: 100%;text-align:center;">
 		<span> <span style="float:left">当前位置是：权限管理-》人员管理</span> <span
 			style="float:right;margin-right: 8px;font-weight: bold">
-            <a style="text-decoration: none;" href="javascript:alert('操作成功！');">【导出excel】</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a style="text-decoration: none;" href="javascript:alert('操作成功！');">【批量删除】</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a style="text-decoration: none;" href="add.jsp">【新增人员】</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="text-decoration: none;" class="sp" id="sp1">【导出excel】</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="text-decoration: none;" class="sp" id="sp2">【批量删除】</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration: none;" href="/power/user/allrole" >【新增人员】</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</span>
 		</span>
 	</div>
@@ -37,13 +82,13 @@
  
 </div>
  <div class="cztable" style="width: 100%;">
-        
+     <form id="form01" method="post">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tbody>
                 <tr style="height: 25px;" align="center">
                     
                     <th  width="8%">
-						<input type="checkbox"/>
+						<input type="checkbox" id="all"/>
 					</th>
 					<th scope="col" width="15%">
                         序号
@@ -62,24 +107,23 @@
                         操作
                     </th>
                 </tr>
-                
-               
-                
+
+            <c:forEach items="${userspi.list}" var="users" varStatus="u">
                 <tr align="center">
-					<th><input type="checkbox"/></th>
+					<th><input type="checkbox" value="${users.userId}" name="ids"/></th>
                     <td>
-                        1
+                        ${u.count}
                     </td>
                     
                     <td>
-                      zhangsan
+                      ${users.userName}
                     </td>
                     <td>
-                       <a href="info.jsp">张三</a>
+                       <a href="info.jsp">${users.userRealname}</a>
                     </td>
                     
                     <td>&nbsp;
-                       管理员
+                        ${users.role.rolename}
                     </td>
                     
                     <td>&nbsp;
@@ -87,87 +131,20 @@
 						<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>
                     </td>
                 </tr>
-                
-                 <tr align="center">
-                   
-                    <th><input type="checkbox"/></th>
-					 <td>
-                        2
-                    </td>
-                    <td>
-                      zhangsan
-                    </td>
-                    <td>
-                       <a href="info.jsp">李四</a>
-                    </td>
-                    
-                    <td>&nbsp;
-                       学生
-                    </td>
-                    <td>&nbsp;
-                        <a href="edit.jsp">修改</a>
-							<a href="JavaScript:void(0)" onclik="del();return false" class="tablelink">删除</a>
+
+            </c:forEach>
+
+                <tr>
+                    <td colspan="20" style="text-align: center;">
+                        <p:page uri="/power/user/list" pageInfo="${userspi}"></p:page>
                     </td>
                 </tr>
-                
-                
-                <tr align="center">
-                    <th><input type="checkbox"/></th>
-					<td>
-                        3
-                    </td>
-                    <td>
-                      zhangsan
-                    </td>
-                    <td>
-                       <a href="info.jsp">王五</a>
-                    </td>
-                    
-                    <td>&nbsp;
-                       老师
-                    </td>
-                    <td>&nbsp;
-                        <a href="edit.jsp">修改</a>
-						<a href="JavaScript:void(0)" onclik="del();return false" class="tablelink">删除</a>
-                    </td>
-                </tr>
-				<tr align="center">
-                    <th><input type="checkbox"/></th>
-					<td>
-                        4
-                    </td>
-                    <td>
-                      zhangsan
-                    </td>
-                    <td>
-                       <a href="info.jsp">赵六</a>
-                    </td>
-                    
-                    <td>&nbsp;
-                       主任
-                    </td>
-                    <td>&nbsp;
-                        <a href="edit.jsp">修改</a>
-						<a href="JavaScript:void(0) onclik="del();return false" class="tablelink">删除</a>
-                    </td>
-                </tr>
-                
-                
-               
-                
-               
-                
-                
+
             </tbody>
         </table>
-        
-          <div class='MainStyle'><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=1' target='_self'>首页</a></div><div class=''><a href='javascript:void(0)' target='_self'>上一页</a></div><div class='NowItemStyle'><a href='javascript:void(0)' target='_self'>1</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=2' target='_self'>2</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=3' target='_self'>3</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=2' target='_self'>下一页</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=3' target='_self'>尾页</a></div><div class=''>总共<b>44</b>条数据</div><div class=''>每页<b>20</b>条数据</div><div class=''><b>1</b>/3</div><div class='SearchStyle'><input type='text' id='john_Page_Search' onkeydown="if(event.keyCode == 13){page_searchIndex();}"/></div><div class=''><input type='button' value='Go' onclick="page_searchIndex()"/></div></div><script>    function page_searchIndex(){        var searchText = document.getElementById('john_Page_Search');        var searchIndex = searchText != null && searchText.value != '' ? parseInt(searchText.value) : 0;        if(searchIndex > 0 && searchIndex <= 3) {             window.location='StudentMaterial.aspx?page=' + searchIndex;        }        else        {            alert('需要跳转的页码不能超出范围！');        }    }</script>
-        </div>
+     </form>
     </div>
-
-        
-        
-      
     </div>
 </body>
+
 </html>

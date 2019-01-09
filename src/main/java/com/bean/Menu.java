@@ -1,5 +1,7 @@
 package com.bean;
 
+import java.util.List;
+
 public class Menu {
     private Integer menuid;
 
@@ -12,6 +14,16 @@ public class Menu {
     private Integer menustate;
 
     private String menuremark;
+
+    private List<Menu> seconds;
+
+    public List<Menu> getSeconds() {
+        return seconds;
+    }
+
+    public void setSeconds(List<Menu> seconds) {
+        this.seconds = seconds;
+    }
 
     public Integer getMenuid() {
         return menuid;
