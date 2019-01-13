@@ -4,13 +4,15 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:tx="http://www.springframework.org/schema/tx"
-
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://cxf.apache.org/jaxws
+        http://cxf.apache.org/schemas/jaxws.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
@@ -138,5 +140,9 @@
     transaction-manager的值与事务管理器的id值一样
 -->
     <tx:annotation-driven transaction-manager="tx"/>
+
+    <!--cxf手机归属地-->
+    <jaxws:client id="phone" serviceClass="cn.com.webxml.MobileCodeWSSoap"
+                  address="http://ws.webxml.com.cn/WebServices/MobileCodeWS.asmx?wsdl"></jaxws:client>
 
 </beans>

@@ -1,4 +1,5 @@
-<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
@@ -13,8 +14,6 @@
     <script src="../../Script/jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
     <script src="../../Script/Common.js" type="text/javascript"></script>
     <script src="../../Script/Data.js" type="text/javascript"></script>
-    
-    
 </head>
 <body>
 
@@ -28,51 +27,51 @@
         </div>
 </div>
 <div class="cztable">
-	<form action="list.jsp" method="post">
 <table border="1" width="100%" class="table_a">
                 <tr  width="120px;">
                     <td width="120px">资源菜单名：<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="f_goods_image" value="权限管理" />
+						<input type="text"  name="menuname" value="${menu01.menuname}" />
 					</td>
                 </tr>
 
-				<tr  width="120px;">
+                <tr  width="120px;">
                     <td>上级菜单：<span style="color:red">*</span>：</td>
                     <td>
-                    	<select>
-                        	<option value="0">顶级菜单</option>
-                            <option value="1">权限管理</option>
-                            
+                        <select>
+                            <c:if test="${menu01.upmenuid==-1}">
+                                <option selected value="0">顶级菜单</option>
+                            </c:if>
+                            <c:if test="${menu01.upmenuid!=-1}">
+                                <option selected value="1">${menu02.menuname}</option>
+                            </c:if>
                         </select>
-					</td>
+                    </td>
                 </tr>
 
                 <tr  width="120px;">
                     <td>菜单路径<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="f_goods_image" value="/info.jsp" />
+						<input type="text"  name="menupath" value="${menu01.menupath}" />
 					</td>
                 </tr>
                 
                 <tr>
                     <td>启用状态<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="radio" name="state" checked value="1" />启用 <input type="radio" name="state" value="0"/>禁用
+                        <input type="radio" name="menustate" ${menu01.menustate==1?"checked":""} value="1" />启用
+                        <input type="radio" name="menustate" ${menu01.menustate==2?"checked":""}value="0"/>禁用
                     </td>
                 </tr>
 
-				
                 <tr  width="120px;">
                     <td>备注<span style="color:red">*</span>：</td>
                     <td>
-						<textarea rows="5" cols="20"></textarea>
-					</td>
+                        <textarea rows="5" cols="20"></textarea>
+                    </td>
                 </tr>
-				
-				
+
 			</table>
-	</form>
 </div>
 
             </div>

@@ -7,9 +7,26 @@
     <head>
         <meta http-equiv=content-type content="text/html; charset=utf-8" />
         <link href="css/admin.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="Script/jquery-1.4.1.js"></script>
+<%--cxf查询手机归属地--%>
+        <script type="text/javascript">
+            $(function () {
+                $("#btn").click(function () {
+                    var phonenumber = $("#inp").val();
+                    $.get(
+                        "/getphone",
+                        {"phonenumber":phonenumber},
+                        function (result) {
+                            alert(result);
+                            $("#content").html(result.str);
+                        }
+                    )
+                })
+            })
+        </script>
     </head>
-    <body>
 
+    <body>
     <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
                 <td background=./img/title_bg1.jpg>当前位置: </td></tr>
@@ -65,7 +82,20 @@
                 <td align=right>上线时间：</td>
                 <td style="color: #880000">
                     <fmt:formatDate value="${sessionScope.logintime}" pattern="yyyy-MM-dd"></fmt:formatDate>
-                </td></tr></td></tr>
+                </td>
+            </tr>
+            <tr>
+                <td align=right>手机归属地：</td>
+                <td style="color: #880000">
+                    <input id="inp" type="text" name="phone"/>
+                    <input type="button" id="btn" value="查询"/>
+                </td>
+                <td id="content"></td>
+            </tr>
+            </td>
+            </tr>
+
+
 
         </table>
 <div style="text-align:center;">

@@ -1,10 +1,16 @@
 package com.controller;
 
+import cn.com.webxml.MobileCodeWSSoap;
 import com.bean.UserTb;
 import com.service.UsertbService;
+import com.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,7 +35,7 @@ public class UsertbController {
                 usertbService.updateByPrimaryKeySelective(tb);
                 session.setAttribute("u1",tb);
                 session.setAttribute("logintime",new Date());
-                if (tb!=null){
+                if (tb!=null&&tb.getRole().getRolestate()==1){
                     /*<script type='text/javascript'>没有效果*/
                     response.getWriter().write("<script>alert('登录成功');location.href='/index.jsp'</script>");
                 }
@@ -41,6 +47,17 @@ public class UsertbController {
                 e.printStackTrace();
             }
         return null;
+    }
+
+    @RequestMapping("/getphone")
+    @ResponseBody
+    public Message getPhone(String phonenumber){
+        ApplicationContext app = new ClassPathXmlApplicationContext("ssm.xml");
+        MobileCodeWSSoap phone1 = (MobileCodeWSSoap)app.getBean("phone");
+        String phoneInfo = phone1.getMobileCodeInfo(phonenumber, "");
+        Message message = new Message();
+        message.setStr(phoneInfo);
+        return message;
     }
 
     @RequestMapping("/loginout")

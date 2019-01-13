@@ -38,6 +38,32 @@
     menuid, menuname, upmenuid, menupath, menustate, menuremark
   </sql>
 
+  <select id="getmenu" resultType="com.bean.Menu">
+    select * from menu
+  </select>
+
+  <insert id="insertmiddle" >
+    insert into  middle(menuid,roleid)
+    values
+    <foreach collection="menuids" item="id" separator=",">
+      (#{id},#{rid})
+    </foreach>
+  </insert>
+
+  <!--导出菜单的excel查询语句-->
+  <select id="selectMenuByMids" resultType="com.bean.Menu">
+    select * from menu where menuid in (
+        <foreach collection="array" separator="," item="mids">
+          #{mids}
+        </foreach>
+    )
+  </select>
+
+  <!--查询所有一级菜单信息-->
+  <select id="selectFirst" resultType="com.bean.Menu">
+    select * from menu where upmenuid = #{upmenuid}
+  </select>
+
   <select id="selectUsersByUids" parameterType="java.lang.Integer" resultMap="m1">
     select * from user_tb ut,role r where ut.role_id = r.roleid and ut.role_id in (
         <foreach collection="array" separator="," item="uids">
@@ -45,6 +71,10 @@
         </foreach>
     )
   </select>
+
+  <delete id="deleteByUdid" >
+    delete from user_tb where user_id = #{udid}
+  </delete>
 
   <select id="selectMenuByRoleid" resultType="com.bean.Menu">
     select * from menu m ,middle mid where m.menuid = mid.menuid and mid.roleid = #{roleid}

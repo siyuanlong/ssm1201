@@ -6,7 +6,7 @@ import com.bean.Exam;
 import com.bean.Major;
 import com.github.pagehelper.PageInfo;
 import com.service.ExamService;
-import com.util.PageUtil;
+import com.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,7 +27,7 @@ public class ExamController {
     public String examPage(ModelMap map,
                           @RequestParam(value = "index", defaultValue = "1") int pageindex,
                           String subject) {
-        PageInfo<Exam> allExamInfo = examService.findAllExamInfo(pageindex, PageUtil.PAGESIZE, subject);
+        PageInfo<Exam> allExamInfo = examService.findAllExamInfo(pageindex, Util.PAGESIZE, subject);
         map.put("exampi", allExamInfo);
         map.put("subject", subject);
         return "Educational/exam/exam";

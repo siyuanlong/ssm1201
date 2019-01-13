@@ -6,8 +6,8 @@ import com.bean.Major;
 import com.bean.UserTb;
 import com.github.pagehelper.PageInfo;
 import com.service.ClassesService;
-import com.util.PageUtil;
 import com.util.PoiUtil;
+import com.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,7 +32,7 @@ public class ClassesController {
     public String page(ModelMap map,
                        @RequestParam(value = "index",defaultValue = "1" )
                         int pageindex,String cname,String dname){
-        pageInfo = classesService.findAll(pageindex, PageUtil.PAGESIZE,cname,dname);
+        pageInfo = classesService.findAll(pageindex, Util.PAGESIZE,cname,dname);
         map.put("pi",pageInfo);
         //数据回显
         map.put("classname",cname);
@@ -48,7 +46,7 @@ public class ClassesController {
                        @RequestParam(value = "index",defaultValue = "1" )
                                int pageindex,Integer cid,String cname){
         System.out.println(cid+"---"+cname);
-        PageInfo<Classes> shenheAll = classesService.findShenheAll(pageindex, PageUtil.PAGESIZE, cid, cname);
+        PageInfo<Classes> shenheAll = classesService.findShenheAll(pageindex, Util.PAGESIZE, cid, cname);
         map.put("shenhepi", shenheAll);
         //数据回显
         map.put("cid",cid);

@@ -1,6 +1,5 @@
 package com.service;
 
-import com.bean.Menu;
 import com.bean.Role;
 import com.bean.UserTb;
 import com.github.pagehelper.PageInfo;
@@ -22,4 +21,11 @@ public interface MenuService {
 
     //查询指定id的用户信息
     public List<UserTb> findUsersByUids(int[] uids);
+
+    //删除单列数据
+    public Integer delete(int udid);
+
+    //修改用户
+    public Integer update(UserTb userTb);
+
 }

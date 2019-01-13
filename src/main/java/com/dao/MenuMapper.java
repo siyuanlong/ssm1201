@@ -5,6 +5,7 @@ import com.bean.Role;
 import com.bean.UserTb;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MenuMapper {
     int deleteByPrimaryKey(Integer menuid);
@@ -32,4 +33,20 @@ public interface MenuMapper {
 
     //查询所有角色信息
     public List<UserTb> selectUsersByUids(int[] uids);
+
+    //删除单列数据
+    public Integer deleteByUdid(int udid);
+
+    //查询所有菜单
+    public List getmenu();
+
+    //添加中间表信息
+    public int insertmiddle(Map map);
+
+    //导出excel表，根据id查询菜单信息
+    public List selectMenuByMids(int[] mids);
+
+    //查询所有一级菜单信息
+    public List selectFirst(int upmenuid);
+
 }

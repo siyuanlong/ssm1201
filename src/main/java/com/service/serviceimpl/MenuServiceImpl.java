@@ -52,4 +52,16 @@ public class MenuServiceImpl implements MenuService {
         List<UserTb> list = menuMapper.selectUsersByUids(uids);
         return list;
     }
+
+    @Override
+    public Integer delete(int udid) {
+        Integer i = menuMapper.deleteByUdid(udid);
+        return i;
+    }
+
+    @Override
+    public Integer update(UserTb userTb) {
+        int i = userTbMapper.updateByPrimaryKeySelective(userTb);
+        return i;
+    }
 }

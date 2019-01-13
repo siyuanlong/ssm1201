@@ -1,4 +1,6 @@
-<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
@@ -28,12 +30,13 @@
         </div>
 </div>
 <div class="cztable">
-	<form action="list.jsp" method="post">
+	<form action="/power/role/edit" method="post">
 <table border="1" width="100%" class="table_a">
+    <input type="hidden" name="roleid" value="${role2.roleid}"/>
                 <tr  width="120px;">
                     <td width="120px">角色名：<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="f_goods_image" value="管理员" />
+						<input type="text"  name="rolename" value="${role2.rolename}" />
 					</td>
                 </tr>
 
@@ -41,15 +44,24 @@
                     <td>菜单资源<span style="color:red">*</span>：</td>
                     <td>
 						<ul>
-                        	<li><input type="checkbox" name="menu"  />权限管理
-                            	<ul>
-                                	<li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu"  />人员管理</li>
-                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu"  />角色管理</li>
-                                    <li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu"  />菜单管理</li>
-                                </ul>
-                            </li>
-                            <li><input type="checkbox" name="menu"  />个人中心</li>
-                            <li><input type="checkbox" name="menu"  />教务中心</li>
+                            <c:forEach items="${menulist2}" var="one">
+                                <li>
+                                    <input type="checkbox" name="menuid" value="${one.menuid}"
+                                        <c:forEach items="${role2.menus}" var="mymenu">
+                                            <c:if test="${mymenu.menuid == one.menuid}">checked</c:if>
+                                        </c:forEach>
+                                    />${one.menuname}
+                                    <ul>
+                                        <c:forEach items="${one.seconds}" var="two">
+                                            <li>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menuid"  value="${two.menuid}"
+                                                    <c:forEach items="${role2.menus}" var="mymenu">
+                                                        <c:if test="${mymenu.menuid == two.menuid}">checked</c:if>
+                                                    </c:forEach>
+                                            />${two.menuname}</li>
+                                        </c:forEach>
+                                    </ul>
+                                </li>
+                            </c:forEach>
                         </ul>
 					</td>
                 </tr>
@@ -57,7 +69,8 @@
                 <tr>
                     <td>启用状态<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="radio" name="state" checked value="1" />启用 <input type="radio" name="state" value="0"/>禁用
+                        <input type="radio" name="rolestate" ${role2.rolestate==1?"checked":""} value="1" />启用
+                        <input type="radio" name="rolestate" ${role2.rolestate!=1?"checked":""}  value="2"/>禁用
                     </td>
                 </tr>
 				

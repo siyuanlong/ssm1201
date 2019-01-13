@@ -112,7 +112,7 @@
                 <tr align="center">
 					<th><input type="checkbox" value="${users.userId}" name="ids"/></th>
                     <td>
-                        ${u.count}
+                        ${c.count+(userspi.pageNum-1)*5}
                     </td>
                     
                     <td>
@@ -127,8 +127,8 @@
                     </td>
                     
                     <td>&nbsp;
-                        <a href="edit.jsp">修改</a>
-						<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>
+                        <a href="/selectOne?udid=${users.userId}">修改</a>
+						<a href="/deleteOne?udid=${users.userId}"> 删除</a>
                     </td>
                 </tr>
 

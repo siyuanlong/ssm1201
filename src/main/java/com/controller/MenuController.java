@@ -4,7 +4,7 @@ import com.bean.Role;
 import com.bean.UserTb;
 import com.github.pagehelper.PageInfo;
 import com.service.MenuService;
-import com.util.PageUtil;
+import com.util.Util;
 import com.util.UsersPoiUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ public class MenuController {
     private PageInfo<UserTb> usersList = null;
     @RequestMapping("/power/user/list")
     public String getUsers(@RequestParam(value = "index",defaultValue = "1") int pageindex, ModelMap map){
-        usersList = menuService.selectAllUsers(pageindex, PageUtil.PAGESIZE);
+        usersList = menuService.selectAllUsers(pageindex, Util.PAGESIZE);
         map.put("userspi",usersList);
         return "/power/user/list";
     }
@@ -66,5 +67,34 @@ public class MenuController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping("/deleteOne")
+    public String deleteOneUser(int udid,ModelMap map){
+        Integer delete = menuService.delete(udid);
+        return "redirect:/power/user/list";
+    }
+
+    @RequestMapping("/selectOne")
+    public String selectOneRole(ModelMap map,int udid){
+        System.out.println("udid:"+udid);
+        List<Role> roles = menuService.findAllRoles();
+        map.put("roles",roles);
+        map.put("id",udid);
+        return "/power/user/edit";
+    }
+
+    @RequestMapping("/power/user/edit")
+    public String updateUsers(ModelMap map,UserTb userTb,HttpServletResponse response){
+        System.out.println("tb:"+userTb.getRoleId());
+        Integer update = menuService.update(userTb);
+        if (update>0){
+            try {
+                response.getWriter().write("<script>alert('修改成功')</script>");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/power/user/list";
     }
 }

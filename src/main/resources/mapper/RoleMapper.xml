@@ -5,16 +5,44 @@
     <id column="roleid" jdbcType="INTEGER" property="roleid" />
     <result column="rolename" jdbcType="VARCHAR" property="rolename" />
     <result column="rolestate" jdbcType="INTEGER" property="rolestate" />
+
+    <collection property="menus" ofType="com.bean.Menu">
+      <id column="menuid" jdbcType="INTEGER" property="menuid" />
+      <result column="menuname" jdbcType="VARCHAR" property="menuname" />
+      <result column="upmenuid" jdbcType="INTEGER" property="upmenuid" />
+      <result column="menupath" jdbcType="VARCHAR" property="menupath" />
+      <result column="menustate" jdbcType="INTEGER" property="menustate" />
+      <result column="menuremark" jdbcType="VARCHAR" property="menuremark" />
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     roleid, rolename, rolestate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from role
-    where roleid = #{roleid,jdbcType=INTEGER}
+
+  <select id="selectAllRoles" resultType="com.bean.Role">
+    select * from role
   </select>
+
+  <select id="selectusers" resultType="int">
+    select count(*) from user_tb where role_id = #{roleid}
+  </select>
+
+  <delete id="deletemiddlebyroleid" >
+    delete from middle where roleid = #{roleid}
+  </delete>
+
+  <delete id="deleterole">
+    delete from role where roleid = #{roleid}
+  </delete>
+
+  <update id="changeState" parameterType="java.lang.Integer" >
+    update role set rolestate = #{state} where roleid = #{rid}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from role , middle where role.roleid = middle.roleid and role.roleid = #{rid}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from role
     where roleid = #{roleid,jdbcType=INTEGER}
@@ -25,7 +53,7 @@
     values (#{roleid,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR}, #{rolestate,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.bean.Role">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="roleid" parameterType="com.bean.Role">
     insert into role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleid != null">
