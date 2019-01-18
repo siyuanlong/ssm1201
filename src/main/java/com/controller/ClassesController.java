@@ -29,10 +29,10 @@ public class ClassesController {
 
     private PageInfo pageInfo = null;
     @RequestMapping("/Educational/class/list")
-    public String page(ModelMap map,
+    public String page(ModelMap map,@RequestParam(defaultValue = "5") int size,
                        @RequestParam(value = "index",defaultValue = "1" )
                         int pageindex,String cname,String dname){
-        pageInfo = classesService.findAll(pageindex, Util.PAGESIZE,cname,dname);
+        pageInfo = classesService.findAll(pageindex, size,cname,dname);
         map.put("pi",pageInfo);
         //数据回显
         map.put("classname",cname);
@@ -109,5 +109,27 @@ public class ClassesController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    //详情
+    @RequestMapping("/Educational/class/info")
+    public String getInfo(int classid,String deptname,ModelMap map){
+        Classes cla = classesService.findClassByclassid(classid);
+        map.put("deptname",deptname);
+        map.put("cla",cla);
+        return "/Educational/class/info";
+    }
+    //修改
+    @RequestMapping("/Educational/class/edit")
+    public String editClass(){
+
+
+
+        return "";
+    }
+    //删除
+    @RequestMapping("/Educational/class/delete")
+    public String deleteClass(int classid,int size){
+        int i = classesService.deleteClass(classid);
+        return "redirect:/Educational/class/list?size="+size;
     }
 }

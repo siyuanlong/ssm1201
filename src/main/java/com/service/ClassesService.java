@@ -29,4 +29,10 @@ public interface ClassesService {
 
     //班级审核
     public PageInfo<Classes> findShenheAll(int pageindex, int pagesize,Integer cid,String cname);
+
+    //班级管理详情
+    public Classes findClassByclassid(int classid);
+
+    //删除
+    public int deleteClass(int classid);
 }

@@ -25,8 +25,9 @@ public class Menu2Controller {
     private Menu2Service menu2Service;
     //查询
     @RequestMapping("/power/menu/getmenus")
-    public String getMenu(ModelMap map,@RequestParam(value = "index" , defaultValue = "1") int pageindex){
-        menupi = menu2Service.findAllMenu(pageindex, Util.PAGESIZE);
+    public String getMenu(ModelMap map,@RequestParam(defaultValue = "5") int size,
+                          @RequestParam(value = "index" , defaultValue = "1") int pageindex){
+        menupi = menu2Service.findAllMenu(pageindex, size);
         map.put("menupi",menupi);
         return "/power/menu/list";
     }
@@ -82,6 +83,59 @@ public class Menu2Controller {
         if(i>0){
             try {
                 response.getWriter().write("<script>alert('修改成功')</script>");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/power/menu/getmenus";
+    }
+
+    //增加前查询
+    @RequestMapping("/power/menu/getaddinfo")
+    public String getAddInfo(ModelMap map){
+        List firstList02 = menu2Service.findFirst(Util.upmenuid);
+        map.put("firstList02",firstList02);
+        return "/power/menu/add";
+    }
+
+    //新增
+    @RequestMapping("/power/menu/add")
+    public String addMenus(Menu menu,HttpServletResponse response){
+        Integer i = menu2Service.addMenus(menu);
+        if (i>0){
+            response.setContentType("text/html;charset=utf-8");
+            try {
+                response.getWriter().write("<script>alert('增加成功')</script>");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/power/menu/getmenus";
+    }
+
+    //删除
+    @RequestMapping("/power/menu/delete")
+    public String deleteMenu(int mid,int upmid,HttpServletResponse response){
+        int i = menu2Service.deleteMenus(mid, upmid);
+        if (i==1){
+            try {
+                response.setContentType("text/html;charset=utf-8");
+                response.getWriter().write("<script>alert('删除成功');</script>");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "redirect:/power/menu/getmenus";
+    }
+
+    //批量删除
+    @RequestMapping("/power/menu/batchdelete")
+    public String batchDelete(String[] mids,HttpServletResponse response){
+        int i = menu2Service.deleteBatchMenus(mids);
+        if (i==1){
+            response.setContentType("text/html;charset=utf-8");
+            try {
+                response.getWriter().write("<script>alert('批量删除成功');</script>");
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -64,4 +64,5 @@ public class MenuServiceImpl implements MenuService {
         int i = userTbMapper.updateByPrimaryKeySelective(userTb);
         return i;
     }
+
 }

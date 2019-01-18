@@ -37,6 +37,16 @@ public class Classes {
 
     private Department department;
 
+    private Major major;
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public void setMajor(Major major) {
+        this.major = major;
+    }
+
     public Department getDepartment() {
         return department;
     }

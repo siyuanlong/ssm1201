@@ -13,6 +13,11 @@
   <sql id="Base_Column_List">
     id, days, content, date, remark, userid, state
   </sql>
+
+  <select id="selectByUserid" resultType="com.bean.Leavebill">
+    select * from leavebill where userid = #{userid}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

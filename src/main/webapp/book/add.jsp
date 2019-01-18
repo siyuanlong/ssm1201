@@ -1,4 +1,5 @@
-﻿<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+﻿<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
@@ -26,57 +27,48 @@
         </div>
 </div>
 <div class="cztable">
-    <form action="list-ziliao.jsp" method="post">
+    <form action="/book/upload" method="post" enctype="multipart/form-data">
 	<table border="1" width="100%" class="table_a">
-                <tr>
-                    <td width="120px;">编号：<span style="color:red">*</span>：</td>
-                    <td><input type="text" name="f_goods_name" value="1" /></td>
-                </tr>
                 <tr>
                     <td>资料名称 ：<span style="color:red">*</span>：</td>
                     <td>
-                       <input type="text" name="f_goods_name" value="3432545" /> 
+                       <input type="text" name="informationname" value="3432545" />
                     </td>
                 </tr>
                
                 <tr>
                     <td>资料类型 ：<span style="color:red">*</span>：</td>
                     <td>
-					<select>
-                    <option>复习资料</option>
-                    <option>练习题</option>
-                    <option>内部资料</option>
-                    <option>真题</option>
-                    </select>	
+					<select name="typeid">
+                        <c:forEach items="${itlist}" var="infotype">
+                             <option value="${infotype.infoid}">${infotype.infotype}</option>
+                        </c:forEach>
+                    </select>
                     </td>
                 </tr>
                 <tr>
                     <td>更新时间：<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" name="f_goods_price" value="2014-04-11 " /></td>
+						<input type="text" name="date" value="2014/04/11 " /></td>
                 </tr>
 
-				 <tr>
-                    <td>格式：<span style="color:red">*</span>：</td>
-                    <td>
-						<input type="text" name="f_goods_price" value="doc" /></td>
-                </tr>
                 <tr>
                     <td>上传人：<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" name="f_goods_price" value="王二麻子" /></td>
+						<input type="text" name="uploader" value="王二麻子" /></td>
                 </tr>
 				<tr>
                     <td>上传：<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="file" name="f_goods_image" value=""/>
+                        <input type="file" name="myfile"/>
                     </td> 
                 </tr>
 				
 
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="submit" value="提交"> <input type="submit" value="返回" onclick="history.back();">
+                        <input type="submit" value="提交">
+                        <input type="submit" value="返回" onclick="history.back();">
                     </td>
                 </tr>  
             </table>

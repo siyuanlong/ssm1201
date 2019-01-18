@@ -35,6 +35,16 @@ public class UserTb {
 
     private Role role;
 
+    private int teacherid;
+
+    public int getTeacherid() {
+        return teacherid;
+    }
+
+    public void setTeacherid(int teacherid) {
+        this.teacherid = teacherid;
+    }
+
     public Role getRole() {
         return role;
     }

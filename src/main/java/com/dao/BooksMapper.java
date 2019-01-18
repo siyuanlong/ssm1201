@@ -2,6 +2,8 @@ package com.dao;
 
 import com.bean.Books;
 
+import java.util.List;
+
 public interface BooksMapper {
     int deleteByPrimaryKey(Integer bookid);
 
@@ -14,4 +16,5 @@ public interface BooksMapper {
     int updateByPrimaryKeySelective(Books record);
 
     int updateByPrimaryKey(Books record);
+
 }

@@ -23,8 +23,9 @@ public class RolesController {
 
     //分页查询角色信息
     @RequestMapping("/power/role/list")
-    public String allRoles(@RequestParam(value = "index",defaultValue = "1") int pageindex, ModelMap map){
-        PageInfo<Role> rolepi = rolesService.findAllRoles(pageindex, Util.PAGESIZE);
+    public String allRoles(@RequestParam(defaultValue = "5") int size,
+                           @RequestParam(value = "index",defaultValue = "1") int pageindex, ModelMap map){
+        PageInfo<Role> rolepi = rolesService.findAllRoles(pageindex, size);
         map.put("rolepi",rolepi);
         return "/power/role/list";
     }

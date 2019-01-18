@@ -28,6 +28,15 @@
 
 	<%--处理全选--%>
 	<script type="text/javascript" >
+        /*5,10,15分页查询*/
+        $(function () {
+            $("#psize").change(function () {
+                var size = $(this).val();
+                alert(size);
+                window.location.href = "/Educational/class/list?size="+size;
+            })
+        })
+
 		$(function () {
 			//这里使用click点击事件
 			$("#all").click(function () {
@@ -99,9 +108,9 @@
 						<td align="center">${cla.peoplecount}</td>
 						<td align="center">${cla.classstate}</td>
 						<td align="center">
-							<a href="info.jsp">详情</a>
-							<a href="javascript:location.href='../book/list.jsp'">发书</a>
-
+							<a href="/Educational/class/info?deptname=${cla.department.departname}&classid=${cla.classid}">详情</a>
+							<a href="/Educational/class/edit">修改</a>
+							<a href="/Educational/class/delete?classid=${cla.classid}&size=${pi.pageSize}">删除</a>
 						</td>
 					</tr>
 				</c:forEach>

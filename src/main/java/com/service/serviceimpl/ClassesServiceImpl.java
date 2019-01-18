@@ -78,4 +78,17 @@ public class ClassesServiceImpl implements ClassesService {
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
     }
+
+    @Override
+    public Classes findClassByclassid(int classid) {
+        Classes classes = classesMapper.selectClassByclassid(classid);
+        return classes;
+    }
+
+    @Override
+    public int deleteClass(int classid) {
+        classesMapper.deleteStudent(classid);
+        int i = classesMapper.deleteByPrimaryKey(classid);
+        return i;
+    }
 }

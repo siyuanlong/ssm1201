@@ -1,4 +1,5 @@
-<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
@@ -28,22 +29,23 @@
         </div>
 </div>
 <div class="cztable">
-	<form action="list.jsp" method="post">
+	<form action="/power/menu/add" method="post">
 <table border="1" width="100%" class="table_a">
                 <tr  width="120px;">
                     <td width="120px">资源菜单名：<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="f_goods_image" value="权限管理" />
+						<input type="text"  name="menuname" value="权限管理" />
 					</td>
                 </tr>
 
 				<tr  width="120px;">
                     <td>上级菜单：<span style="color:red">*</span>：</td>
                     <td>
-                    	<select>
-                        	<option value="0">顶级菜单</option>
-                            <option value="1">权限管理</option>
-                            
+                    	<select name="upmenuid">
+                        	<option value="-1">顶级菜单</option>
+                                <c:forEach items="${firstList02}" var="first">
+                                    <option value="${first.menuid}">${first.menuname}</option>
+                                </c:forEach>
                         </select>
 					</td>
                 </tr>
@@ -51,14 +53,15 @@
                 <tr  width="120px;">
                     <td>菜单路径<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="f_goods_image" value="/info.jsp" />
+						<input type="text"  name="menupath" value="/info.jsp" />
 					</td>
                 </tr>
                 
                 <tr>
                     <td>启用状态<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="radio" name="state" checked value="1" />启用 <input type="radio" name="state" value="0"/>禁用
+                        <input type="radio" name="menustate" checked value="1" />启用
+                        <input type="radio" name="menustate" value="2"/>禁用
                     </td>
                 </tr>
 

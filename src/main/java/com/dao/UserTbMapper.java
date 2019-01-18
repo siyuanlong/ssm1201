@@ -18,4 +18,8 @@ public interface UserTbMapper {
         自定义方法
     */
     public UserTb selectByUserName(String userName);
+
+    //根据学生id查询老师id
+    public int findteacherid(int userid);
+
 }

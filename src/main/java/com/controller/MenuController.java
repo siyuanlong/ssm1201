@@ -27,8 +27,9 @@ public class MenuController {
 
     private PageInfo<UserTb> usersList = null;
     @RequestMapping("/power/user/list")
-    public String getUsers(@RequestParam(value = "index",defaultValue = "1") int pageindex, ModelMap map){
-        usersList = menuService.selectAllUsers(pageindex, Util.PAGESIZE);
+    public String getUsers(@RequestParam(defaultValue = "5") int size,
+                           @RequestParam(value = "index",defaultValue = "1") int pageindex, ModelMap map){
+        usersList = menuService.selectAllUsers(pageindex,size);
         map.put("userspi",usersList);
         return "/power/user/list";
     }

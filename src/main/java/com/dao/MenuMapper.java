@@ -49,4 +49,16 @@ public interface MenuMapper {
     //查询所有一级菜单信息
     public List selectFirst(int upmenuid);
 
+    //删除中间表菜单信息
+    public Integer deleteMiddle(int mid);
+
+    //根据mids查询用户数量
+    public Integer selectUserCountByMids(List mids);
+
+    //删除二级菜单
+    public Integer deleteMenuByMids(List mids);
+
+    //根据一级菜单查询二级菜单的数量
+    public Integer selectSecondCount(List firstlist);
+
 }

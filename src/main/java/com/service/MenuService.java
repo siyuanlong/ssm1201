@@ -1,5 +1,6 @@
 package com.service;
 
+import com.bean.Menu;
 import com.bean.Role;
 import com.bean.UserTb;
 import com.github.pagehelper.PageInfo;

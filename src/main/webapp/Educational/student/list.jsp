@@ -21,9 +21,14 @@
 
 
 <script>
-	function del(){
-		confirm("确认操作？");
-	}
+    /*5,10,15分页查询*/
+    $(function () {
+        $("#psize").change(function () {
+            var size = $(this).val();
+            alert(size);
+            window.location.href = "/Educational/student/list?size="+size;
+        })
+    })
 
 </script>
 

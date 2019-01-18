@@ -49,6 +49,11 @@ public class UsertbServiceImpl implements UsertbService {
             }
             //将menu对象集合赋值给Role的menus属性
             ut.getRole().setMenus(menuList);
+
+            if (ut.getStudentId()!=null){
+                int teacherid = userTbMapper.findteacherid(ut.getUserId());
+                ut.setTeacherid(teacherid);
+            }
             return ut;
         }
         return null;

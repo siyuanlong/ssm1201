@@ -1,4 +1,7 @@
-<%@page pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@page isELIgnored="false" pageEncoding="utf-8" language="java" contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="p" uri="http://java.sun.com/jsp/jstl/p" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
@@ -42,6 +45,26 @@
                 $("#cAll").addClass("hover");
             }
         });
+
+        /*模糊查询*/
+        function findinfo(size) {
+            var title = $("#inp").val();
+            if (title==null || title=="" ){
+                alert("请输入标题内容");
+            } else{
+                window.location.href = "/book/getinfo?size="+size+"&title="+title;
+            }
+        }
+
+        /*5,10,15分页查询*/
+        $(function () {
+            $("#psize").change(function () {
+                var size = $(this).val();
+                alert(size);
+                window.location.href = "/book/getinfo?size="+size;
+            })
+        })
+
     </script>
 </head>
 <body>
@@ -50,7 +73,7 @@
             <span>
                 <span style="float:left">当前位置是：学习中心-》资料中心</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                	<a style="text-decoration: none" href="add.jsp">【上传】</a> &emsp;
+                	<a style="text-decoration: none" href="/book/getinfotype">【上传】</a> &emsp;
                     <a style="text-decoration: none" href="javascript:history.back();">【返回】</a> &emsp;&emsp;
                 </span>
             </span>
@@ -67,7 +90,7 @@
             <strong>
             标题:&nbsp;&nbsp;
             </strong>
-            <input type="text" />&nbsp;&nbsp;<input type="button" value="搜索" />
+            <input id="inp" type="text" name="title" />&nbsp;&nbsp;<input type="button" value="搜索" onclick="findinfo(${infopi.pageSize})" />
             </li>
             <li><strong>类型：</strong><a href="#" id="tAll" >全部</a>
                 
@@ -86,136 +109,53 @@
             </li>
         </ul>
         <div class="cztable">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center;">
-                <tr>
-                <th width="6%">格式</th>
-                    <th style="padding-left: 20px;">
-                        资料名称
-                    </th>
-                    <th style="width: 15%; text-align: center;">
-                        资料类型
-                    </th>
-                    <th style="width: 15%; text-align: center;">
-                        更新时间
-                    </th>
-                    <th style="width: 15%; text-align: center;">
-                        操作
-                    </th>
-                </tr>
-                
-                <tr>
-                <td><img src='../Images/FileIco/doc.gif' /></td>
-                    <td class="xxleft">
-                        
-                        英语二
-                    </td>
+            <form method="post" action="/book/upload">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="text-align:center;">
+                    <tr>
+                    <th width="6%">格式</th>
+                        <th style="padding-left: 20px;">
+                            资料名称
+                        </th>
+                        <th style="width: 15%; text-align: center;">
+                            资料类型
+                        </th>
+                        <th style="width: 15%; text-align: center;">
+                            更新时间
+                        </th>
+                        <th style="width: 15%; text-align: center;">
+                            操作
+                        </th>
+                    </tr>
+
+                <c:forEach items="${infopi.list}" var="info">
+                    <tr>
                     <td>
-                        复习资料
+                        <img src='../Images/FileIco/doc.gif' />
                     </td>
-                    <td>
-                        2014-04-11
-                    </td>
-                    <td>
-                        <a href="info-ziliao.jsp">详情</a>
-                    <a href="edit-ziliao.jsp">编辑</a>
-                    </td>
-                </tr>
-                
-                <tr>
-                <td><img src='../Images/FileIco/default.jpg' /></td>
-                    <td class="xxleft">
-                        
-                        环境法学
-                    </td>
-                    <td>
-                        复习资料
-                    </td>
-                    <td>
-                        2013-09-30
-                    </td>
-                    <td>
-                       <a href="info-ziliao.jsp">详情</a>
-                    <a href="edit-ziliao.jsp">编辑</a>
-                    </td>
-                </tr>
-                
-                <tr>
-                <td><img src='../Images/FileIco/default.jpg' /></td>
-                    <td class="xxleft">
-                        
-                        行政诉讼法
-                    </td>
-                    <td>
-                        复习资料
-                    </td>
-                    <td>
-                        2013-09-30
-                    </td>
-                    <td>
-                       <a href="info-ziliao.jsp">详情</a>
-                    <a href="edit-ziliao.jsp">编辑</a>
-                    </td>
-                </tr>
-                
-               
-                
-                <tr>
-                <td><img src='../Images/FileIco/doc.gif' /></td>
-                    <td class="xxleft">
-                        
-                        税法原理
-                    </td>
-                    <td>
-                        复习资料
-                    </td>
-                    <td>
-                        2013-09-30
-                    </td>
-                    <td>
-                    <a href="info-ziliao.jsp">详情</a>
-                    <a href="edit-ziliao.jsp">编辑</a>
-                    </td>
-                </tr>
-                
-                <tr>
-                <td><img src='../Images/FileIco/doc.gif' /></td>
-                    <td class="xxleft">
-                        
-                        企业与公司法
-                    </td>
-                    <td>
-                        复习资料
-                    </td>
-                    <td>
-                        2013-09-30
-                    </td>
-                    <td>
-                        <a href="info-ziliao.jsp">详情</a>
-                    <a href="edit-ziliao.jsp">编辑</a>
-                    </td>
-                </tr>
-                
-                <tr>
-                <td><img src='../Images/FileIco/doc.gif' /></td>
-                    <td class="xxleft">
-                        
-                        行政诉讼法
-                    </td>
-                    <td>
-                        练习题
-                    </td>
-                    <td>
-                        2013-09-29
-                    </td>
-                    <td>
-                        <a href="info-ziliao.jsp">详情</a>
-                    <a href="edit-ziliao.jsp">编辑</a>
-                    </td>
-                </tr>
-                
-                
-            </table>
-            <div class='MainStyle'><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=1' target='_self'>首页</a></div><div class=''><a href='javascript:void(0)' target='_self'>上一页</a></div><div class='NowItemStyle'><a href='javascript:void(0)' target='_self'>1</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=2' target='_self'>2</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=3' target='_self'>3</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=2' target='_self'>下一页</a></div><div class=''><a href='http://sm.zk0731.com/OnlineTeaching/StudentMaterial.aspx?page=3' target='_self'>尾页</a></div><div class=''>总共<b>44</b>条数据</div><div class=''>每页<b>20</b>条数据</div><div class=''><b>1</b>/3</div><div class='SearchStyle'><input type='text' id='john_Page_Search' onkeydown="if(event.keyCode == 13){page_searchIndex();}"/></div><div class=''><input type='button' value='Go' onclick="page_searchIndex()"/></div></div><script>    function page_searchIndex(){        var searchText = document.getElementById('john_Page_Search');        var searchIndex = searchText != null && searchText.value != '' ? parseInt(searchText.value) : 0;        if(searchIndex > 0 && searchIndex <= 3) {             window.location='StudentMaterial.aspx?page=' + searchIndex;        }        else        {            alert('需要跳转的页码不能超出范围！');        }    }</script>
+                        <td class="xxleft">
+                            ${info.informationname}
+                        </td>
+                        <td>
+                            ${info.infotype.infotype}
+                        </td>
+                        <td>
+                            <fmt:formatDate value="${info.date}" pattern="yyyy-MM-dd"></fmt:formatDate>
+                        </td>
+                        <td>
+                            <a href="info-ziliao.jsp">详情</a>
+                        <a href="edit-ziliao.jsp">编辑</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+
+                    <tr>
+                        <td colspan="20" style="text-align: center;">
+                            <p:page uri="/book/getinfo" pageInfo="${infopi}"></p:page>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
         </div>
     </div>
 

@@ -20,9 +20,14 @@
 <script src="../../Script/Data.js" type="text/javascript"></script>
 
 <script>
-	function del(){
-		confirm("确认删除？");
-	}
+    /*5,10,15分页查询*/
+    $(function () {
+        $("#psize").change(function () {
+            var size = $(this).val();
+            alert(size);
+            window.location.href = "/Educational/exam/exam?size="+size;
+        })
+    })
 
 </script>
 

@@ -25,6 +25,11 @@
       <result column="departname" jdbcType="VARCHAR" property="departname" />
     </association>
 
+    <association property="major" javaType="com.bean.Major">
+      <id column="majorid" jdbcType="INTEGER" property="majorid" />
+      <result column="majorname" jdbcType="VARCHAR" property="majorname" />
+      <result column="departid" jdbcType="INTEGER" property="departid" />
+    </association>
   </resultMap>
 
   <!--查询班主任使用-->
@@ -92,8 +97,16 @@
 
   </select>
 
+  <delete id="deleteStudent" >
+    delete from student where classid = #{classid}
+  </delete>
+
   <select id="selectallzy" resultType="com.bean.Major">
     select * from major where departid = #{id}
+  </select>
+
+  <select id="selectClassByclassid" resultMap="BaseResultMap">
+    select * from classes c , major m where c.majorid = m.majorid and c.classid = #{classid}
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

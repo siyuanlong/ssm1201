@@ -59,6 +59,11 @@
     )
   </select>
 
+    <!--删除中间表菜单信息-->
+    <delete id="deleteMiddle" parameterType="int">
+        delete from middle where menuid = #{mid}
+    </delete>
+
   <!--查询所有一级菜单信息-->
   <select id="selectFirst" resultType="com.bean.Menu">
     select * from menu where upmenuid = #{upmenuid}
@@ -71,6 +76,31 @@
         </foreach>
     )
   </select>
+
+    <!--根据mids查询用户的数量-->
+    <select id="selectUserCountByMids" resultType="int">
+        select count(*) from middle where menuid in (
+            <foreach collection="list" item="mids" separator=",">
+                #{mids}
+            </foreach>
+        )
+    </select>
+
+    <delete id="deleteMenuByMids">
+        delete from menu where menuid in (
+            <foreach collection="list" item="mids" separator=",">
+            #{mids}
+            </foreach>
+        )
+    </delete>
+
+    <select id="selectSecondCount" resultType="int">
+      select count(*) from menu where upmenuid in (
+        <foreach collection="list" item="firstlist" separator=",">
+            #{firstlist}
+        </foreach>
+      )
+    </select>
 
   <delete id="deleteByUdid" >
     delete from user_tb where user_id = #{udid}

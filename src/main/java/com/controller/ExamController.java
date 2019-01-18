@@ -24,10 +24,10 @@ public class ExamController {
     private ExamService examService;
 
     @RequestMapping("/Educational/exam/exam")
-    public String examPage(ModelMap map,
+    public String examPage(ModelMap map,@RequestParam(defaultValue = "5") int size,
                           @RequestParam(value = "index", defaultValue = "1") int pageindex,
                           String subject) {
-        PageInfo<Exam> allExamInfo = examService.findAllExamInfo(pageindex, Util.PAGESIZE, subject);
+        PageInfo<Exam> allExamInfo = examService.findAllExamInfo(pageindex, size, subject);
         map.put("exampi", allExamInfo);
         map.put("subject", subject);
         return "Educational/exam/exam";

@@ -9,10 +9,27 @@
     <result column="filetype" jdbcType="VARCHAR" property="filetype" />
     <result column="uploader" jdbcType="VARCHAR" property="uploader" />
     <result column="url" jdbcType="VARCHAR" property="url" />
+
+    <association property="infotype" javaType="com.bean.Infotype">
+      <id column="infoid" jdbcType="INTEGER" property="infoid" />
+      <result column="infotype" jdbcType="VARCHAR" property="infotype" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     informationid, informationname, typeid, date, filetype, uploader, url
   </sql>
+
+  <select id="selectInfo" resultMap="BaseResultMap">
+    select * from information im , infotype it where im.typeid = it.infoid
+    <if test="title!=null and title!=''">
+      and informationname like '%${title}%'
+    </if>
+  </select>
+
+  <select id="selectInfoType" resultType="com.bean.Infotype">
+    select * from infotype
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

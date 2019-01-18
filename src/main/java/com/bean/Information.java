@@ -17,6 +17,16 @@ public class Information {
 
     private String url;
 
+    private Infotype infotype;
+
+    public Infotype getInfotype() {
+        return infotype;
+    }
+
+    public void setInfotype(Infotype infotype) {
+        this.infotype = infotype;
+    }
+
     public Integer getInformationid() {
         return informationid;
     }

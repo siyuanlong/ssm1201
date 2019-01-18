@@ -29,6 +29,14 @@
     user_id, student_id, role_id, user_name, user_ps, user_realname, user_sex, user_email, 
     user_phone, user_address, user_idcard, user_content, logincount, regdate, managerid
   </sql>
+
+  <select id="findteacherid" resultType="int">
+    select classes.teacherid from classes ,student
+    where classes.classid = student.classid and student.studentid = (
+    select student_id from user_tb where user_tb.user_id = #{userid}
+)
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

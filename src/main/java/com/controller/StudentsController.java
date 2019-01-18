@@ -22,10 +22,10 @@ public class StudentsController {
     private StudentsService studentsService;
 
     @RequestMapping("/Educational/student/list")
-    public String stuPage(ModelMap map,
+    public String stuPage(ModelMap map,@RequestParam(defaultValue = "5") int size,
                           @RequestParam(value = "index",defaultValue = "1") int pageindex,
                           String sname,String sid,String ssex){
-        PageInfo<Student> stuPageInfo = studentsService.findAllStuInfo(pageindex, Util.PAGESIZE, sname, sid, ssex);
+        PageInfo<Student> stuPageInfo = studentsService.findAllStuInfo(pageindex, size, sname, sid, ssex);
         map.put("stupi",stuPageInfo);
         map.put("sname",sname);
         map.put("sid",sid);

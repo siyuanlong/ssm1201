@@ -44,10 +44,17 @@
             })
             /*批量删除*/
             $("#sp02").click(function () {
-                $("#form01")[0].action="/power/menu/deleteall";
+                $("#form01")[0].action="/power/menu/batchdelete";
                 $("#form01").submit();
             })
-
+            /*5,10,15分页查询*/
+            $(function () {
+                $("#psize").change(function () {
+                    var size = $(this).val();
+                    alert(size);
+                    window.location.href = "/power/menu/getmenus?size="+size;
+                })
+            })
         })
     </script>
 </head>
@@ -58,7 +65,7 @@
                 style="float:right;margin-right: 8px;font-weight: bold">
 			<span style="text-decoration: none;" id="sp01" class="sp">【导出excel】</span>&nbsp;&nbsp;&nbsp;&nbsp;
             <span style="text-decoration: none;" id="sp02" class="sp">【批量删除】</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a style="text-decoration: none;" href="/power/menu/add">【新增菜单】</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration: none;" href="/power/menu/getaddinfo">【新增菜单】</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</span>
 		</span>
 </div>
@@ -93,7 +100,7 @@
 
             <c:forEach items="${menupi.list}" var="menu" varStatus="c">
                 <tr>
-                    <th align="center"><input type="checkbox" value="${menu.menuid}" name="mids"/></th>
+                    <th align="center"><input type="checkbox" value="${menu.menuid}_${menu.upmenuid}" name="mids"/></th>
                     <td align="center">
                         ${c.count+(menupi.pageNum-1)*5}
                     </td>
@@ -111,7 +118,7 @@
                     <td align="center">
                         <a href="/power/menu/info?mid=${menu.menuid}">详情</a>
                         <a href="/power/menu/geteditinfo?mid=${menu.menuid}">修改</a>
-                        <a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>
+                        <a href="/power/menu/delete?mid=${menu.menuid}&upmid=${menu.upmenuid}">删除</a>
                     </td>
                 </tr>
             </c:forEach>

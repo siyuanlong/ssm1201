@@ -34,4 +34,8 @@ public interface ClassesMapper {
 
     public List selectshenheall(Map map);
 
+    public Classes selectClassByclassid(int classid);
+
+    public int deleteStudent(int classid);
+
 }

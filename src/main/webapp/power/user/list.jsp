@@ -61,6 +61,15 @@
                     ids[i].checked = $(this)[0].checked;
                 }
             })
+
+            /*5,10,15分页查询*/
+            $(function () {
+                $("#psize").change(function () {
+                    var size = $(this).val();
+                    alert(size);
+                    window.location.href = "/power/user/list?size="+size;
+                })
+            })
         })
 	</script>
 

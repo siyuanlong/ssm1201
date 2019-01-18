@@ -22,4 +22,14 @@ public interface Menu2Service {
 
     //修改
     public int updateMenu(Menu menu);
+
+    //新增菜单
+    public Integer addMenus(Menu menu);
+
+    //删除菜单
+    public int deleteMenus(int mid,int upmid);
+
+    //批量删除菜单
+    public int deleteBatchMenus(String[] ids);
+
 }
